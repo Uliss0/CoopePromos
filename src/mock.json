@@ -1,0 +1,160 @@
+{
+    "comercios": [
+        {
+            "Direccion": "MURATURE 459",
+            "Dto": 10,
+            "Localidad": "PUNTA ALTA",
+            "NomComercio": "SURFSHOP BAMBACI",
+            "NroTel": 421754,
+            "Prefijo": 2932,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.88022604,
+            "Longitud": -62.07417782,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "PELLEGRINI 68",
+            "Dto": 15,
+            "Localidad": "PUNTA ALTA",
+            "NomComercio": "TERRITORIO EXTREMO",
+            "NroTel": null,
+            "Prefijo": null,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.87739259,
+            "Longitud": -62.08361239,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "AV. ROCA 301",
+            "Dto": 15,
+            "Localidad": "ALLEN",
+            "NomComercio": "LOREDANA",
+            "NroTel": 4451827,
+            "Prefijo": 298,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.9798486,
+            "Longitud": -67.830361,
+            "Provincia": "Río Negro"
+        },
+        {
+            "Direccion": "TOMÁS ORELL 279",
+            "Dto": 15,
+            "Localidad": "ALLEN",
+            "NomComercio": "LUZ SPORT",
+            "NroTel": 4453027,
+            "Prefijo": 298,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.97816846,
+            "Longitud": -67.82579761,
+            "Provincia": "Río Negro"
+        },
+        {
+            "Direccion": "SAN MARTÍN 590",
+            "Dto": 15,
+            "Localidad": "AZUL",
+            "NomComercio": "CHE BERLÍN",
+            "NroTel": 633996,
+            "Prefijo": 2281,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -36.77978393,
+            "Longitud": -59.86112476,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "AV. LIBERTAD 137",
+            "Dto": 10,
+            "Localidad": "BENITO JUÁREZ",
+            "NomComercio": "CALZADOS CARIOCA",
+            "NroTel": 454502,
+            "Prefijo": 2292,
+            "Rubro": "ZAPATERÍA",
+            "Latitud": -37.6716756,
+            "Longitud": -59.80693688,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "AV. SAN MARTÍN 295",
+            "Dto": 15,
+            "Localidad": "BOLÍVAR",
+            "NomComercio": "SIN LÍMITE",
+            "NroTel": 411974,
+            "Prefijo": 2314,
+            "Rubro": "DEPORTE",
+            "Latitud": -36.23368863,
+            "Longitud": -61.10987598,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "GÜEMES 32",
+            "Dto": 15,
+            "Localidad": "BOLÍVAR",
+            "NomComercio": "CAPRICHOSAS",
+            "NroTel": 576397,
+            "Prefijo": 2314,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -36.23184548,
+            "Longitud": -61.11172439,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "25 DE MAYO 201",
+            "Dto": 15,
+            "Localidad": "CHOELE CHOEL",
+            "NomComercio": "LA ECONÓMICA-CHOELE CHOEL",
+            "NroTel": 442446,
+            "Prefijo": 2946,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -39.295631,
+            "Longitud": -65.6547953,
+            "Provincia": "Río Negro"
+        },
+        {
+            "Direccion": "COLÓN 1177",
+            "Dto": 15,
+            "Localidad": "CARHUÉ",
+            "NomComercio": "YG INDUMENTARIA",
+            "NroTel": 696546,
+            "Prefijo": 2923,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -37.1767902,
+            "Longitud": -62.7600089,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "STEGMANN 763",
+            "Dto": 10,
+            "Localidad": "CORONEL PRINGLES",
+            "NomComercio": "MAURO CALZADOS",
+            "NroTel": 466077,
+            "Prefijo": 2922,
+            "Rubro": "ZAPATERÍA",
+            "Latitud": -37.98512647,
+            "Longitud": -61.35547412,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "Direccion": "AV. ZEBALLOS 290",
+            "Dto": 15,
+            "Localidad": "GUATRACHÉ",
+            "NomComercio": "STYLO MODAS",
+            "NroTel": 492675,
+            "Prefijo": 2924,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -37.6668835,
+            "Longitud": -63.5378684,
+            "Provincia": "La Pampa"
+        },
+        {
+            "Direccion": "AV. CAMPOS 148",
+            "Dto": 15,
+            "Localidad": "LOBERÍA",
+            "NomComercio": "LOS GALLEGUITOS",
+            "NroTel": 440167,
+            "Prefijo": 2261,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.16214976,
+            "Longitud": -58.78152804,
+            "Provincia": "Buenos Aires"
+        }
+    ]
+} 
