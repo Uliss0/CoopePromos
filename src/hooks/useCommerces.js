@@ -1,9 +1,8 @@
 import { useRef, useState, useMemo, useCallback } from 'react'
+import { searchCommerces } from '../services/commerces.js'
 
-import comercios from '../mock.json'
-
-export function useCommerce ({ search, sort }) {
-  const [commerces, setCommerce] = useState([])
+export function useCommerces ({ search, sort }) {
+  const [commerces, setCommerces] = useState([])
   const [loading, setLoading] = useState(false)
   // el error no se usa pero puedes implementarlo
   // si quieres:
@@ -18,8 +17,9 @@ export function useCommerce ({ search, sort }) {
       setLoading(true)
       setError(null)
       previousSearch.current = search
-      const newCommerce = comercios
-      setCommerce(newCommerce)
+      const newCommerces = await searchCommerces({ search })
+     
+      setCommerces(newCommerces)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -30,7 +30,7 @@ export function useCommerce ({ search, sort }) {
 
   const sortedCommerces = useMemo(() => {
     return sort
-      ? [...commerces].sort((a, b) => a.NomComercio.localeCompare(b.NomComercio))
+      ? [...commerces].sort((a, b) => a.nomComercio.localeCompare(b.nomComercio))
       : commerces
   }, [sort, commerces])
 

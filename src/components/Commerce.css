@@ -1,0 +1,48 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+  }
+  
+  main {
+    align.items:center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  form {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+.commerces {
+    list-style: none;
+    margin: 0;
+    padding: 5%;
+  
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   
+    width: 100%;
+    gap: 32px;
+  }
+  
+  .commerce {
+    
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .commerce h3, .commerce p {
+    margin: 0;
+  }
+  
+  .commerce img {
+    border-radius: 8px;
+    margin-top: 16px;
+  }
