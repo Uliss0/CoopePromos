@@ -1,23 +1,29 @@
 import { useRef, useState, useMemo, useCallback } from 'react'
 import { searchCommerces } from '../services/commerces.js'
 
-export function useCommerces ({ search, sort }) {
+export function useCommerces ({ search,select, sort }) {
+  
   const [commerces, setCommerces] = useState([])
   const [loading, setLoading] = useState(false)
   // el error no se usa pero puedes implementarlo
   // si quieres:
   const [, setError] = useState(null)
   const previousSearch = useRef(search)
-
-  const getCommerces = useCallback(async ({ search }) => {
-    if (search === previousSearch.current) return
+  const previousLocal = useRef(select)
+  //console.log("usecommerce1: ", select)
+  const getCommerces = useCallback(async ({ search, select }) => {
+    console.log("search usecommerces2", search, "select:", select)
+    if ((search === previousSearch.current) && (select === previousLocal.current)) return
     // search es ''
 
     try {
       setLoading(true)
       setError(null)
       previousSearch.current = search
-      const newCommerces = await searchCommerces({ search })
+      previousLocal.current = select
+      
+      const newCommerces = await searchCommerces({ search, select })
+     // console.log("newcomerces, hook:",newCommerces)
      
       setCommerces(newCommerces)
     } catch (e) {
@@ -27,6 +33,12 @@ export function useCommerces ({ search, sort }) {
       setLoading(false)
     }
   }, [])
+
+
+  
+
+
+
 
   const sortedCommerces = useMemo(() => {
     return sort

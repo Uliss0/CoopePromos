@@ -37,7 +37,7 @@ useEffect(() => {
   return( 
   <header
    id='header_nav'
-   className='bg-[#5e60ce] fixed w-full max-w-[1800px]
+   className='bg-[#585ae4] fixed w-full max-w-[1800px]
   z-50 '>
     <div
 
