@@ -1,74 +1,65 @@
-import React,  { useState, useEffect}from 'react';
-//import Nav from '../components/Nav';
+import React, { useState } from 'react';
 import logo from '../assets/logo-coopeplus.png';
 
+function NavBar() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-export const navVariants={
-  hidden:{
-    clipPath:'circle(5.8% at 58% 0%)',
-    opacity:0,
-      transition:{
-        type:'spring',
-        delay:0.2,
-        stiffness:300,
-        damping:140
-      }
-  },show:{
-    opacity:1,
-    clipPath:'circle(130% at 50% 0)',
-    transition:{
-      type:'spring',
-      
-      stiffness:80,
-      
-    }
-  }
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  return (
+    <>
+      <nav className="p-5 bg-white shadow md:flex md:items-center md:justify-between fixed w-full z-50">
+        <div className="flex justify-between items-center">
+          <a href="index.html" className="text-2xl font-[Popp] cursor-pointer">
+            <img src={logo} className="h-10 inline" alt="" /> 
+          </a>
+          <span
+            className="text-3xl cursor-pointer md:hidden mx-2 block"
+            onClick={toggleMenu}
+          >
+            {menuOpen ? (
+              <ion-icon name="close"></ion-icon>
+            ) : (
+              <ion-icon name="menu"></ion-icon>
+            )}
+          </span>
+        </div>
+        <ul
+          className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-0 md:pl-0 pl-7 md:opacity-100 ${
+            menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'
+          } transition-all ease-in duration-500`}
+        >
+          <li className="mx-4 my-6 md:my-0">
+            <a href="#" className="text-xl hover:text-red-500 duration-500">
+              Home
+            </a>
+          </li>
+          <li className="mx-4 my-6 md:my-0">
+            <a href="#" className="text-xl hover:text-red-500 duration-500">
+              About
+            </a>
+          </li>
+          <li className="mx-4 my-6 md:my-0">
+            <a href="#" className="text-xl hover:text-red-500 duration-500">
+              Service
+            </a>
+          </li>
+          <li className="mx-4 my-6 md:my-0">
+            <a href="#" className="text-xl hover:text-red-500 duration-500">
+              Blog
+            </a>
+          </li>
+          <li className="mx-4 my-6 md:my-0">
+            <a href="#" className="text-xl hover:text-red-500 duration-500">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </>
+  );
 }
 
-
-const Header = () => {
-const [isActive, setIsActive] = useState(false);
-//const [nav,setNav]=useState(false);
-useEffect(() => {
-  window.addEventListener('scroll', () => {
-    window.scrollY > 50 ? setIsActive(true) : setIsActive(false);
-  });
-});
-  return( 
-  <header
-   id='header_nav'
-   className='bg-[#585ae4] fixed w-full max-w-[1800px]
-  z-50 '>
-    <div
-
-    className='container mx-auto p-2'>
-      <div className='flex justify-between items-center 
-       lg:px-0 relative text-white '>
-        {/*menu button */}
-        
-        {/*logo */}
-        <div
-        >
-          <a href='#home'>
-            {/* if header is active make logo smaller*/}
-            <img
-            className={`${
-              isActive ? 'w-[190px] h-[50px] transition-all duration-200 ' 
-              : 'w-[200px] h-[60px]  transition-all duration-200   scale-105'}`}
-              src={logo}
-              alt=''
-              />
-          </a>
-          
-          </div>
-        {/*social icons*/} 
-       
-        {/*nav */}
-        
-      </div>
-    </div>
-    </header>
-  );
-};
-
-export default Header;
+export default NavBar;

@@ -1,20 +1,23 @@
 import React, { useEffect, useState, useRef } from "react"
-import { createRoot } from "react-dom/client"
+
 
 import {
   APIProvider,
   Map,
   useMap,
-  AdvancedMarker
+  AdvancedMarker,
+  InfoWindow
 } from "@vis.gl/react-google-maps"
 import { MarkerClusterer } from "@googlemaps/markerclusterer"
 import trees from "../threes"
 
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
-const Maps = () => (
+
+ const Maps = () => (
+  
   <APIProvider apiKey={API_KEY}>
-    <div style={{ height: "50vh", width: "100%" }}>
+    <div style={{ height: "55vh", width: "100%" }}>
     <Map
       mapId={"bf51a910020fa25a"}
       center={{ lat: 43.64, lng: -79.41 }}
@@ -22,15 +25,16 @@ const Maps = () => (
     >
       <Markers points={trees} />
     </Map>
+    
     </div>
   </APIProvider>
-)
+) 
 
 const Markers = ({ points }) => {
   const map = useMap()
   const [markers, setMarkers] = useState({})
   const clusterer = useRef(null)
-
+  const [openMarkers, setOpenMarkers] = useState({});
   // Initialize MarkerClusterer
   useEffect(() => {
     if (!map) return
@@ -60,16 +64,36 @@ const Markers = ({ points }) => {
     })
   }
 
+  const handleMarkerClick = (point) => {
+    setOpenMarkers(prev => ({
+      ...prev,
+      [point.key]: !prev[point.key] // toggle the state for the clicked marker
+    }));
+  };
+
+
   return (
     <>
+    
       {points.map(point => (
+        <div key={point.key}>
         <AdvancedMarker
           position={point}
           key={point.key}
           ref={marker => setMarkerRef(marker, point.key)}
+          onClick={() => handleMarkerClick(point)}
         >
-          <span className="tree">🌳</span>
+          <span className="tree" >🌳</span>
+          {openMarkers[point.key] && (
+            <InfoWindow position={point} 
+            onCloseClick={() => handleMarkerClick(point)}>
+              <p>I'm in Bahia Blanca</p>
+            </InfoWindow>
+          )}
         </AdvancedMarker>
+        
+        </div>
+        
       ))}
     </>
   )
