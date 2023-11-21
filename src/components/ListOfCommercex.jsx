@@ -3,7 +3,7 @@ function ListOfCommerces ({ comercios }) {
       <ul className='commerce'>
         {
           comercios.map(commerce => (
-            <li className='commerce' key={commerce.Direccion}>
+            <li className='commerce' key={commerce.ID} value={commerce.ID}>
               <h3>{commerce.NomComercio}</h3>
               <p>{commerce.Localidad}</p>
               <p>{commerce.Rubro}</p>

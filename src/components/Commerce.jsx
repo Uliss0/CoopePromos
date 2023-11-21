@@ -97,7 +97,7 @@ function Commerce () {
   }
 
   return (
-    <div className='page'>
+    <div className='page bg-slate-100'>
 
       <header>
        
@@ -111,7 +111,7 @@ function Commerce () {
              
             onChange={handleSort} checked={sort}
             />
-            <label forhtml="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ordenar</label>
+            <label forhtml="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">Ordenar</label>
           </div>
 
           <select name="localidad" id="localidad" onChange={handleSelect} value={select} 

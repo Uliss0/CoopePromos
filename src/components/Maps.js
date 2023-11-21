@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from "react"
-
-
 import {
   APIProvider,
   Map,
@@ -10,7 +8,8 @@ import {
 } from "@vis.gl/react-google-maps"
 import { MarkerClusterer } from "@googlemaps/markerclusterer"
 import trees from "../threes"
-
+//import logo15 from '../assets/15c.png'
+import logo10 from '../assets/10c.png'
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
 
@@ -83,11 +82,12 @@ const Markers = ({ points }) => {
           ref={marker => setMarkerRef(marker, point.key)}
           onClick={() => handleMarkerClick(point)}
         >
-          <span className="tree" >🌳</span>
+          <span className="tree" ><img src={logo10 } className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo10"/></span>
           {openMarkers[point.key] && (
             <InfoWindow position={point} 
             onCloseClick={() => handleMarkerClick(point)}>
-              <p>I'm in Bahia Blanca</p>
+              <p>I'm in </p>
+              <p>{point.name}</p>
             </InfoWindow>
           )}
         </AdvancedMarker>

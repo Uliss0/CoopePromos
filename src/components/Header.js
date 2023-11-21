@@ -10,9 +10,9 @@ function NavBar() {
 
   return (
     <>
-      <nav className="p-5 bg-white shadow md:flex md:items-center md:justify-between fixed w-full z-50">
+      <nav className="p-5 bg-[#4273b4] shadow md:flex md:items-center md:justify-between fixed w-full z-50 text-white">
         <div className="flex justify-between items-center">
-          <a href="index.html" className="text-2xl font-[Popp] cursor-pointer">
+          <a href="index.html" className="text-2xl  cursor-pointer">
             <img src={logo} className="h-10 inline" alt="" /> 
           </a>
           <span
@@ -27,32 +27,32 @@ function NavBar() {
           </span>
         </div>
         <ul
-          className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-0 md:pl-0 pl-7 md:opacity-100 ${
+          className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#4273b4] w-full left-0 md:w-auto md:py-0 py-0 md:pl-0 pl-7 md:opacity-100 ${
             menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'
           } transition-all ease-in duration-500`}
         >
-          <li className="mx-4 my-6 md:my-0">
-            <a href="#" className="text-xl hover:text-red-500 duration-500">
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="#" className="text-xl   font-medium ">
               Home
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0">
-            <a href="#" className="text-xl hover:text-red-500 duration-500">
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="#" className="text-xl    font-medium ">
               About
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0">
-            <a href="#" className="text-xl hover:text-red-500 duration-500">
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="#" className="text-xl   font-medium hover:">
               Service
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0">
-            <a href="#" className="text-xl hover:text-red-500 duration-500">
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="#" className="text-xl   font-medium hover:">
               Blog
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0">
-            <a href="#" className="text-xl hover:text-red-500 duration-500">
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="#" className="text-xl   font-medium ">
               Contact
             </a>
           </li>
