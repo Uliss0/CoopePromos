@@ -10,7 +10,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className="p-5 bg-[#4273b4] shadow md:flex md:items-center md:justify-between fixed w-full z-50 text-white">
+      <nav className="p-5 bg-[#4273b4] shadow md:flex md:items-center md:justify-between fixed w-full z-50 text-white font-Sarala">
         <div className="flex justify-between items-center">
           <a href="index.html" className="text-2xl  cursor-pointer">
             <img src={logo} className="h-10 inline" alt="" /> 
@@ -31,29 +31,21 @@ function NavBar() {
             menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'
           } transition-all ease-in duration-500`}
         >
-          <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="#" className="text-xl   font-medium ">
-              Home
-            </a>
-          </li>
+          
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
             <a href="#" className="text-xl    font-medium ">
-              About
+              Centros de Atencion
             </a>
           </li>
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
             <a href="#" className="text-xl   font-medium hover:">
-              Service
+              Preguntas frecuentes
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="#" className="text-xl   font-medium hover:">
-              Blog
-            </a>
-          </li>
+          
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
             <a href="#" className="text-xl   font-medium ">
-              Contact
+              Contacto
             </a>
           </li>
         </ul>
