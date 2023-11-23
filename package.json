@@ -1,6 +1,7 @@
 {
   "name": "coopelanding",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.5.1",
