@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo-coopeplus.png';
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const[isActive, setIsActive] = useState(false); 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(()=>{
+    window.addEventListener('scroll', ()=>{
+    window.scrollY > 50 ? setIsActive(true) : setIsActive(false);
+    });
+
+  },[]);
+
   return (
     <>
-      <nav className="p-5 bg-[#4273b4] shadow md:flex md:items-center md:justify-between fixed w-full z-50 text-white font-Sarala">
+      <nav id='header' 
+      className={`${
+        isActive 
+        ? 'h-[4rem]  shadow-lg'
+        : 'h-[5rem] ' 
+      } 
+        fixed bg-[#4273b4]  p-5
+        w-full mx-auto transition-all duration-300 
+        shadow md:flex md:items-center md:justify-between z-50 text-white font-sara
+        `}
+      >
+      
         <div className="flex justify-between items-center">
-          <a href="index.html" className="text-2xl  cursor-pointer">
+          <a href="https://www.coopeplus.com.ar/" target='_blank' rel='noreferrer' className="text-2xl  cursor-pointer">
             <img src={logo} className="h-10 inline" alt="" /> 
           </a>
           <span
@@ -31,20 +49,24 @@ function NavBar() {
             menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'
           } transition-all ease-in duration-500`}
         >
-          
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="#" className="text-xl    font-medium ">
+            <a href="https://www.coopeplus.com.ar"  className="text-xl    ">
+              Home
+            </a>
+          </li>
+          <li className="mx-4 my-6 md:my-0 hover:scale-105">
+            <a href="https://www.coopeplus.com.ar/Home/Cats" target='_blank' rel='noreferrer' className="text-xl    ">
               Centros de Atencion
             </a>
           </li>
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="#" className="text-xl   font-medium hover:">
+            <a href="https://www.coopeplus.com.ar/Usuarios/Faq" target='_blank' rel='noreferrer' className="text-xl   ">
               Preguntas frecuentes
             </a>
           </li>
           
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="#" className="text-xl   font-medium ">
+            <a href="https://www.coopeplus.com.ar/Home/AtencionUsuarios" target='_blank' rel='noreferrer' className="text-xl   ">
               Contacto
             </a>
           </li>

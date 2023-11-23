@@ -4,15 +4,18 @@
 
 @font-face {
   font-family: 'Sarala';
-  src: local('Sarala'), url(./fonts/Sarala-Regular.ttf) format('ttf');
+  src: local('Sarala'), url(./fonts/Sarala-Regular.ttf) ;
 }
 
 
 
+.header{
+  font-family: 'RockSalt';
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue','Sarala',
+  font-family: 'Sarala', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

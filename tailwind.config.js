@@ -4,7 +4,10 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    
+    fontFamily: {
+      'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Sarala', ],
+      sara:'Sarala',
+    },
     extend: {
       screens: {
         'xxs': '320px',
@@ -28,9 +31,7 @@ module.exports = {
         '2xl': '1536px',
         // => @media (min-width: 1536px) { ... }
       },
-      fontFamily: {
-        'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
-      }
+     
     },
   },
   

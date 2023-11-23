@@ -12,7 +12,7 @@ export function useCommerces ({ search,select, sort }) {
   const previousLocal = useRef(select)
   //console.log("usecommerce1: ", select)
   const getCommerces = useCallback(async ({ search, select }) => {
-    console.log("search usecommerces2", search, "select:", select)
+    /////console.log("search usecommerces2", search, "select:", select)
     if ((search === previousSearch.current) && (select === previousLocal.current)) return
     // search es ''
 

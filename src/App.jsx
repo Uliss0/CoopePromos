@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Commerce from './components/Commerce';
 import Maps from './components/Maps';
 import Footer from './components/Footer';
-import Dropdown from './components/Dropdown';
+//import Dropdown from './components/Dropdown';
 
 
 
@@ -18,8 +18,7 @@ function App() {
      <Slider/>
      <Commerce/>
      <Maps/>
-     
-     <Dropdown/>
+     <Footer/>
     
     </div>
   );

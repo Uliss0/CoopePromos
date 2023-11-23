@@ -1,4 +1,4 @@
-import './Commerces.css'
+
 import picture from '../assets/picture.jpg'
 function ListOfCommerces ({ commerces }) {
   
@@ -16,21 +16,22 @@ function ListOfCommerces ({ commerces }) {
               <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
               <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">10% dto</div>
                 <img
-                  className="  max-h-[190px] max-w-[190px] items-center inline-flex pt-2 "
+                  className="  max-h-[190px] max-w-[190px] items-center inline-flex pt-2 p-b-0 "
                   src={picture}
                   alt="" />
               </div>
               <div className="p-6">
-              <h3 className='font-medium'>{commerce.nomComercio}</h3>
+              <h3 className='text-base pt-4'>{commerce.nomComercio}</h3>
               <hr className="border-b border-blue-500"/>
-                <p className="text-base text-dark  dark:text-dark">
-                  {commerce.localidad}
-                </p>
-                <p className="text-base text-dark dark:text-dark">
+                
+                <p className="text-sm text-dark dark:text-dark">
                   {commerce.rubro}
                 </p>
-                <p className="text-base text-dark  dark:text-dark">
+                <p className="text-sm text-dark  dark:text-dark">
                   {commerce.direccion}
+                </p>
+                <p className="text-sm text-dark  dark:text-dark">
+                  <strong>{commerce.localidad}</strong>
                 </p>
               </div>
               </div>

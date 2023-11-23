@@ -88,6 +88,7 @@ const Markers = ({ points }) => {
             onCloseClick={() => handleMarkerClick(point)}>
               <p>I'm in </p>
               <p>{point.name}</p>
+              <p>Direccion: Fitz Roy 140</p>
             </InfoWindow>
           )}
         </AdvancedMarker>

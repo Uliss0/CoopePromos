@@ -1,9 +1,9 @@
-import commerces from '../mock.json'
-const API_KEY = '4287ad07'
+//import commerces from '../mock.json'
+//const API_KEY = '4287ad07'
 
 export const searchCommerces = async ({ search, select }) => {
   
-  console.log("search serv:",search, "select", select)
+  //console.log("search serv:",search, "select", select)
   try {
     //const response = await fetch('/src/mocks/mock.json')
     //console.log(response)
