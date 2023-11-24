@@ -10,13 +10,18 @@ import { MarkerClusterer } from "@googlemaps/markerclusterer"
 import trees from "../threes"
 //import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
+import { useCheckbox } from '../context/CheckContext';
+
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
+
 
 
  const Maps = () => (
   
+  
   <APIProvider apiKey={API_KEY}>
-    <div style={{ height: "55vh", width: "100%" }}>
+    
+    <div style={{ height: "55vh", width: "100%" }} className="" id="map">
     <Map
       mapId={"bf51a910020fa25a"}
       center={{ lat: 43.64, lng: -79.41 }}
@@ -34,6 +39,10 @@ const Markers = ({ points }) => {
   const [markers, setMarkers] = useState({})
   const clusterer = useRef(null)
   const [openMarkers, setOpenMarkers] = useState({});
+
+  const { isChecked } = useCheckbox();
+ 
+
   // Initialize MarkerClusterer
   useEffect(() => {
     if (!map) return
@@ -73,29 +82,43 @@ const Markers = ({ points }) => {
 
   return (
     <>
-    
-      {points.map(point => (
-        <div key={point.key}>
-        <AdvancedMarker
-          position={point}
-          key={point.key}
-          ref={marker => setMarkerRef(marker, point.key)}
-          onClick={() => handleMarkerClick(point)}
-        >
-          <span className="tree" ><img src={logo10 } className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo10"/></span>
-          {openMarkers[point.key] && (
-            <InfoWindow position={point} 
-            onCloseClick={() => handleMarkerClick(point)}>
-              <p>I'm in </p>
-              <p>{point.name}</p>
-              <p>Direccion: Fitz Roy 140</p>
-            </InfoWindow>
-          )}
-        </AdvancedMarker>
-        
+      <div>
+      {isChecked ? (
+        <div>
+          <h2>Componente desactivado</h2>
+          <p>Este componente está desactivado por el checkbox.</p>
         </div>
-        
-      ))}
+      ) : (
+
+
+      <div >
+          {points.map(point => (
+            <div key={point.key} >
+            <AdvancedMarker
+              position={point}
+              key={point.key}
+              ref={marker => setMarkerRef(marker, point.key)}
+              onClick={() => handleMarkerClick(point)}
+            >
+              <span className="tree" ><img src={logo10 } className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo10"/></span>
+              {openMarkers[point.key] && (
+                <InfoWindow position={point} 
+                onCloseClick={() => handleMarkerClick(point)}>
+                  <p>I'm in </p>
+                  <p>{point.name}</p>
+                  <p>Direccion: Fitz Roy 140</p>
+                </InfoWindow>
+              )}
+            </AdvancedMarker>
+            
+            </div>
+            
+          ))}
+
+        </div>
+       )}
+     </div>   
+           
     </>
   )
 }

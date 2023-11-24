@@ -6,8 +6,9 @@ import Header from './components/Header';
 import Commerce from './components/Commerce';
 import Maps from './components/Maps';
 import Footer from './components/Footer';
+import { CheckboxProvider } from './context/CheckContext';
 //import Dropdown from './components/Dropdown';
-import Card from './components/Card';
+
 
 
 
@@ -17,9 +18,11 @@ function App() {
     
      <Header/>
      <Slider/>
-     <Commerce/>
+     <CheckboxProvider>
      <Maps/>
-     <Card/>
+     <Commerce/>
+     </CheckboxProvider>
+     
      <Footer/>
     
     </div>

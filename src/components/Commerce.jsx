@@ -5,7 +5,7 @@ import { useCommerces } from '../hooks/useCommerces.js'
 import { Commerces } from './Commerces.jsx'
 import { useState,  useCallback } from 'react'
 import debounce from 'just-debounce-it'
-
+import { useCheckbox } from '../context/CheckContext.js';
 
 
 function useSearch () {
@@ -97,6 +97,13 @@ function Commerce () {
     //console.log("handleChange:" , select)
   }
 
+  const { isChecked, toggleCheckbox } = useCheckbox();
+
+  const handleCheckboxChange = () => {
+    toggleCheckbox();
+  };
+
+
   return (
     <div className='page'>
 
@@ -131,9 +138,18 @@ function Commerce () {
             <option value="Villa Maria">Villa Maria</option>
             </optgroup>
             </select>
-            <button type='submit' 
-            className='  m-4 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg  px-5 py-2.5 text-center 
-            '>Buscar</button>
+            <div className='p-2'id='checkMap'>
+            <label className="relative inline-flex cursor-pointer items-center ">
+            <input id="switch2" type="checkbox" className="peer sr-only" checked={isChecked}
+          onChange={handleCheckboxChange}/>
+            <label htmlFor="switch2" className="hidden"></label>
+            <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "
+                       ></div>
+          </label>
+              <div>
+              <label className='text-xs '>Mapa</label>
+              </div>
+          </div>
           </form>
        
         {error && <p style={{ color: 'red' }}>{error}</p>}

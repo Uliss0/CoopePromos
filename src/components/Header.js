@@ -15,6 +15,8 @@ function NavBar() {
 
   },[]);
 
+  
+
   return (
     <>
       <nav id='header' 
@@ -24,8 +26,8 @@ function NavBar() {
         : 'h-[5rem] ' 
       } 
         fixed bg-[#4273b4]  p-5
-        w-full mx-auto transition-all duration-300 
-        shadow md:flex md:items-center md:justify-between z-50 text-white font-sara
+        w-full mx-auto transition-all duration-500 
+        shadow md:flex md:items-center md:justify-between z-40 text-white font-sara
         `}
       >
       
@@ -41,12 +43,13 @@ function NavBar() {
               <ion-icon name="close"></ion-icon>
             ) : (
               <ion-icon name="menu"></ion-icon>
+              
             )}
           </span>
         </div>
         <ul
-          className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#4273b4] w-full left-0 md:w-auto md:py-0 py-0 md:pl-0 pl-7 md:opacity-100 ${
-            menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'
+          className={`md:flex md:items-center z-[-10] md:z-auto md:static absolute bg-[#4273b4] w-full left-0 md:w-auto md:py-0 py-0 md:pl-0 pl-7 md:opacity-100 ${
+            menuOpen ? 'opacity-100 top-[60px]' : 'opacity-0 top-[-400px]'
           } transition-all ease-in duration-500`}
         >
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
