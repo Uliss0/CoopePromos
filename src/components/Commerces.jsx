@@ -28,7 +28,7 @@ function ListOfCommerces ({ commerces }) {
               className=" max-w-auto min-w-[220px]  rounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-white
               hover:scale-105 transition-all  duration-400 cursor-pointer flex flex-row md:flex-col sm:flex-col" onClick={() => handleCommerceClick(commerce)}>
               <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
-              <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">10% dto</div>
+              <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">{commerce.dto}% dto</div>
                 <img
                   className="  max-h-[190px] max-w-[190px] items-center inline-flex pt-2 p-b-0 "
                   src={picture}
@@ -55,7 +55,7 @@ function ListOfCommerces ({ commerces }) {
       }
     </ul>
     {selectedCommerce && (
-      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center transition-all  duration-400">
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center transition-all  duration-400">
        
             <Card commerce={selectedCommerce} onClose={closeDetails} />
         

@@ -1,14 +1,22 @@
-import footerimg from '../assets/Footerimg.svg'
-function Footer () {
+import footerimgs from '../assets/Footerimg.svg'
+import {searchLocalidades} from '../services/localities'
+function Footer ({localidad}) {
   
-    return (
-      <div className='pt-10'>
-      <a href='https://www.coopeplus.com.ar' target='_blank' rel='noreferrer'>
-    <img className='w-full'    src={footerimg} alt='foto'/>
-    </a>
-    </div>
-    )};
+      const localidadencontrada=searchLocalidades(localidad)
+     console.log({localidadencontrada})
+     
+      return (
+        <div className='pt-10'>
+        <a href={localidadencontrada.link} target='_blank' rel='noreferrer'>
+      <img className='w-full' src={localidadencontrada.img.footerimg} alt='foto'/>
+      </a>
 
+      </div>
+      
+      )}
+  
+
+  
 
 
 

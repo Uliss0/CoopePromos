@@ -6,6 +6,7 @@ import { Commerces } from './Commerces.jsx'
 import { useState,  useCallback } from 'react'
 import debounce from 'just-debounce-it'
 import { useCheckbox } from '../context/CheckContext.js';
+import Footer from './Footer.jsx';
 
 
 function useSearch () {
@@ -55,6 +56,7 @@ function Commerce () {
   
   const { select,  updateSelect } = useSelect()  
   const { commerces, loading, getCommerces } = useCommerces({ search,select })
+  
 
   
   const debouncedGetCommerces = useCallback(
@@ -159,7 +161,9 @@ function Commerce () {
       <main className=''>
         {
           loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />
+          
         }
+        <Footer localidad={select}/>
       
       </main>
     </div>

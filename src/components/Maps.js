@@ -16,23 +16,31 @@ const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
 
 
- const Maps = () => (
-  
-  
-  <APIProvider apiKey={API_KEY}>
-    
-    <div style={{ height: "55vh", width: "100%" }} className="" id="map">
-    <Map
-      mapId={"bf51a910020fa25a"}
-      center={{ lat: 43.64, lng: -79.41 }}
-      zoom={10}
-    >
-      <Markers points={trees} />
-    </Map>
-    
-    </div>
-  </APIProvider>
-) 
+const Maps = () => {
+  const { isChecked } = useCheckbox();
+
+  if (isChecked) {
+    return (
+      <div>
+      
+      </div>
+    )
+  }
+
+  return (
+    <APIProvider apiKey={API_KEY}>
+      <div style={{ height: "55vh", width: "100%" }}  id="map">
+        <Map
+          mapId={"bf51a910020fa25a"}
+          center={{ lat: 43.64, lng: -79.41 }}
+          zoom={10}
+        >
+          <Markers points={trees} />
+        </Map>
+      </div>
+    </APIProvider>
+  )
+}
 
 const Markers = ({ points }) => {
   const map = useMap()
@@ -41,7 +49,7 @@ const Markers = ({ points }) => {
   const [openMarkers, setOpenMarkers] = useState({});
 
   const { isChecked } = useCheckbox();
- 
+  
 
   // Initialize MarkerClusterer
   useEffect(() => {
@@ -82,11 +90,10 @@ const Markers = ({ points }) => {
 
   return (
     <>
-      <div>
+      
       {isChecked ? (
         <div>
-          <h2>Componente desactivado</h2>
-          <p>Este componente está desactivado por el checkbox.</p>
+          
         </div>
       ) : (
 
@@ -117,7 +124,7 @@ const Markers = ({ points }) => {
 
         </div>
        )}
-     </div>   
+      
            
     </>
   )

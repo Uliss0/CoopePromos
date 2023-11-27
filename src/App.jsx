@@ -5,7 +5,7 @@ import Slider from './components/Slider';
 import Header from './components/Header';
 import Commerce from './components/Commerce';
 import Maps from './components/Maps';
-import Footer from './components/Footer';
+
 import { CheckboxProvider } from './context/CheckContext';
 //import Dropdown from './components/Dropdown';
 
@@ -23,7 +23,7 @@ function App() {
      <Commerce/>
      </CheckboxProvider>
      
-     <Footer/>
+     
     
     </div>
   );

@@ -4,8 +4,6 @@ import picture from '../assets/picture.jpg'
 
 
 
-
-
 export function Card({ commerce, onClose }){
     const handleClose = () => {
         
@@ -18,7 +16,7 @@ export function Card({ commerce, onClose }){
         <div className="card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <div className="bg-white ">
             <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
-              <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">10% dto</div>
+              <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">{commerce.dto}% dto</div>
                 <img
                   className="  max-h-[200px] max-w-[200px] items-center inline-flex pt-2 p-b-0 "
                   src={picture}

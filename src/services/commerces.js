@@ -21,7 +21,9 @@ export const searchCommerces = async ({ search, select }) => {
       localidad: commerce.Localidad,
       rubro: commerce.Rubro,
       direccion: commerce.Direccion,
-      
+      dto:commerce.Dto,
+      provincia:commerce.Provincia,
+     
     }))
   }
 
@@ -40,7 +42,9 @@ export const searchCommerces = async ({ search, select }) => {
         localidad: commerce.Localidad,
         rubro: commerce.Rubro,
         direccion: commerce.Direccion,
-        
+        dto:commerce.Dto,
+        provincia:commerce.Provincia,
+       
       })) 
       
     }
@@ -63,6 +67,9 @@ export const searchCommerces = async ({ search, select }) => {
         localidad: commerce.Localidad,
         rubro: commerce.Rubro,
         direccion: commerce.Direccion,
+        dto:commerce.Dto,
+        provincia:commerce.Provincia,
+        
       }))
     }
 
