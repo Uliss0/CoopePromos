@@ -3,11 +3,11 @@ import '../App.css'
 import './Commerce.css'
 import { useCommerces } from '../hooks/useCommerces.js'
 import { Commerces } from './Commerces.jsx'
-import { useState,  useCallback } from 'react'
+import { useState,  useCallback,useRef } from 'react'
 import debounce from 'just-debounce-it'
 import { useCheckbox } from '../context/CheckContext.js';
 import Footer from './Footer.jsx';
-
+import {useLocalities} from '../hooks/useLocalities.js'
 
 function useSearch () {
   const [search, updateSearch] = useState('')
@@ -50,18 +50,19 @@ function useSelect () {
 }
 
 function Commerce () {
-  //const [sort, setSort] = useState(false)
+  const [sort, setSort] = useState(false)
 
   const { search, updateSearch, error } = useSearch()
   
   const { select,  updateSelect } = useSelect()  
-  const { commerces, loading, getCommerces } = useCommerces({ search,select })
+  const { commerces, loading, getCommerces } = useCommerces({ search,select ,sort})
+  const { localidades, getLocalidades } = useLocalities({select })
   
-
+  let ref = useRef('');
   
   const debouncedGetCommerces = useCallback(
     debounce(search => {
-      getCommerces({ search,select })
+      getCommerces({ search:search,select:ref.current  })
     }, 300)
     , [getCommerces],
     //console.log('search', search, "select:" , select , "debounced")
@@ -71,31 +72,37 @@ function Commerce () {
   const handleSubmit = (event) => {
     event.preventDefault()
     
-    getCommerces({ search, select })
+    updateSearch(search)
+    updateSelect(select)
+    handleSelect(ref.current)
+    debouncedGetCommerces(search, ref.current)
   }
 
 
   const handleSelect = (event) => {
     const newSelect = event.target.value
-
+    ref.current = newSelect
     updateSearch(search)
     updateSelect(newSelect)
     //debouncedGetCommerces(newSelect)
-    getCommerces({ search, select: newSelect })
-    
+    //getLocalidades({ select: newSelect })
+   getCommerces({ search:search, select: newSelect })
+  
   }
-  /* 
+  
   // ordenar
   const handleSort = () => {
     setSort(!sort)
   }
- */
+ 
   const handleChange = (event) => {
     const newSearch = event.target.value
-
-    updateSearch(newSearch)
+    
     updateSelect(select)
-    debouncedGetCommerces(newSearch, select)
+    updateSearch(newSearch)
+    debouncedGetCommerces(newSearch, ref.current)
+  
+    
     //console.log("handleChange:" , select)
   }
 
@@ -117,7 +124,7 @@ function Commerce () {
               m-4 p-4" >'
               onChange={handleChange} value={search} name='query' placeholder='Buscar' autoComplete="off"
             />
-            {/* 
+            
             <div className="flex items-center mb-4">
               <input id="default-checkbox" type="checkbox" value="" className=" gap-y-4 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               
@@ -126,7 +133,7 @@ function Commerce () {
               
               <label forhtml="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">Ordenar</label>
             </div>
-            */}
+            
             <select name="localidad" id="localidad" onChange={handleSelect} value={select} 
             className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
             <option value="">Localidad</option>

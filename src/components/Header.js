@@ -52,25 +52,17 @@ function NavBar() {
             menuOpen ? 'opacity-100 top-[60px]' : 'opacity-0 top-[-400px]'
           } transition-all ease-in duration-500`}
         >
-          <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="https://www.coopeplus.com.ar"  className="text-xl    ">
-              Home
-            </a>
-          </li>
+          
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
             <a href="https://www.coopeplus.com.ar/Home/Cats" target='_blank' rel='noreferrer' className="text-xl    ">
               Centros de Atencion
             </a>
           </li>
-          <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="https://www.coopeplus.com.ar/Usuarios/Faq" target='_blank' rel='noreferrer' className="text-xl   ">
-              Preguntas frecuentes
-            </a>
-          </li>
+          
           
           <li className="mx-4 my-6 md:my-0 hover:scale-105">
-            <a href="https://www.coopeplus.com.ar/Home/AtencionUsuarios" target='_blank' rel='noreferrer' className="text-xl   ">
-              Contacto
+            <a href="https://www.coopeplus.com.ar/Account/LoginUsuario" target='_blank' rel='noreferrer' className="text-xl   ">
+              Centro de Consultas Online
             </a>
           </li>
         </ul>

@@ -10,22 +10,26 @@ export function useCommerces ({ search,select, sort }) {
   const [, setError] = useState(null)
   const previousSearch = useRef(search)
   const previousLocal = useRef(select)
-  //console.log("usecommerce1: ", select)
+ console.log("usecommerce1: ", select)
   const getCommerces = useCallback(async ({ search, select }) => {
     /////console.log("search usecommerces2", search, "select:", select)
     if ((search === previousSearch.current) && (select === previousLocal.current)) return
     // search es ''
-
+    
     try {
+      
+
       setLoading(true)
       setError(null)
       previousSearch.current = search
       previousLocal.current = select
+      console.log("search usecommerces3", search, "select:", select)
       
       const newCommerces = await searchCommerces({ search, select })
      // console.log("newcomerces, hook:",newCommerces)
      
       setCommerces(newCommerces)
+      
     } catch (e) {
       setError(e.message)
     } finally {
@@ -35,16 +39,14 @@ export function useCommerces ({ search,select, sort }) {
   }, [])
 
 
-  
 
-
-
-
-  const sortedCommerces = useMemo(() => {
+   const sortedCommerces = useMemo(() => {
     return sort
       ? [...commerces].sort((a, b) => a.nomComercio.localeCompare(b.nomComercio))
       : commerces
   }, [sort, commerces])
 
-  return { commerces: sortedCommerces, getCommerces, loading }
+  return { commerces: sortedCommerces, getCommerces, loading } 
+
+  
 }

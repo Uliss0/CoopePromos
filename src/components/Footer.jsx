@@ -3,7 +3,7 @@ import {searchLocalidades} from '../services/localities'
 function Footer ({localidad}) {
   
       const localidadencontrada=searchLocalidades(localidad)
-     console.log({localidadencontrada})
+     //console.log({localidadencontrada})
      
       return (
         <div className='pt-10'>

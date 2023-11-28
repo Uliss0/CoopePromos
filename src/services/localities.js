@@ -1,10 +1,9 @@
 import footerimg from '../assets/Footerimg.svg'
 
 
-export const searchLocalidades =  ({ select }) => {
+export const searchLocalidades =  ( {select }) => {
   
-    try {
-
+    console.log("select ", select)
       if (select === undefined){
         
         let localidadDef={
@@ -13,8 +12,6 @@ export const searchLocalidades =  ({ select }) => {
             link:'https://www.coopeplus.com.ar',
             latitud:-38.7210667,
             longitud:-62.3387734}
-
-            console.log(localidadDef)
             return localidadDef
 
         }
@@ -26,15 +23,14 @@ export const searchLocalidades =  ({ select }) => {
                     //console.log("datajs ", dataJson)
                     const arr=Object.values(dataJson)
 
+                    return arr.find(item => item.localidad.toLowerCase().includes(select.toLowerCase()))
+                    
                   
                 }catch (e) {
                       throw new Error('Error searching ')
-                    
-                  }
+                   }
                 }
             }
-    }catch(e){
-        throw new Error('Error searching ')
-    }
+   
 }
 

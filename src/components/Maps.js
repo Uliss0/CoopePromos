@@ -6,7 +6,7 @@ import {
   AdvancedMarker,
   InfoWindow
 } from "@vis.gl/react-google-maps"
-import { MarkerClusterer } from "@googlemaps/markerclusterer"
+import { MarkerClusterer,SuperClusterAlgorithm } from "@googlemaps/markerclusterer"
 import trees from "../threes"
 //import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
@@ -34,6 +34,7 @@ const Maps = () => {
           mapId={"bf51a910020fa25a"}
           center={{ lat: 43.64, lng: -79.41 }}
           zoom={10}
+                              
         >
           <Markers points={trees} />
         </Map>
@@ -55,7 +56,11 @@ const Markers = ({ points }) => {
   useEffect(() => {
     if (!map) return
     if (!clusterer.current) {
-      clusterer.current = new MarkerClusterer({ map })
+      clusterer.current = new MarkerClusterer({
+        
+        map,
+        algorithm: new SuperClusterAlgorithm({ radius: 80 }),
+      })
     }
   }, [map])
 
