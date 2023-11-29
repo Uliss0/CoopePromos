@@ -1,20 +1,18 @@
 import '../App.css'
-
 import './Commerce.css'
-import { useCommerces } from '../hooks/useCommerces.js'
-import { Commerces } from './Commerces.jsx'
 import { useState,  useCallback,useRef } from 'react'
-import debounce from 'just-debounce-it'
+import { useCommerces } from '../hooks/useCommerces.js'
 import { useCheckbox } from '../context/CheckContext.js';
-import Footer from './Footer.jsx';
 import {useLocalities} from '../hooks/useLocalities.js'
+import { Commerces } from './Commerces.jsx'
+import Footer from './Footer.jsx';
+import debounce from 'just-debounce-it'
 
 function useSearch () {
   const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
   //const isFirstInput = useRef(true)
 
-  
   
 /*
   
@@ -31,7 +29,6 @@ function useSearch () {
       return
     }
 
-  
 
     if (search.length < 3) {
       setError('La búsqueda debe tener al menos 3 caracteres')
@@ -51,12 +48,10 @@ function useSelect () {
 
 function Commerce () {
   const [sort, setSort] = useState(false)
-
   const { search, updateSearch, error } = useSearch()
-  
   const { select,  updateSelect } = useSelect()  
   const { commerces, loading, getCommerces } = useCommerces({ search,select ,sort})
-  const { localidades, getLocalidades } = useLocalities({select })
+  const { localidad, getLocalidades } = useLocalities({select})
   
   let ref = useRef('');
   
@@ -65,45 +60,40 @@ function Commerce () {
       getCommerces({ search:search,select:ref.current  })
     }, 300)
     , [getCommerces],
-    //console.log('search', search, "select:" , select , "debounced")
-    
   )
 
+//Manejador del submit del formulario
   const handleSubmit = (event) => {
     event.preventDefault()
     
-    updateSearch(search)
-    updateSelect(select)
     handleSelect(ref.current)
+    //getLocalidades({ select: ref.current })
     debouncedGetCommerces(search, ref.current)
   }
 
-
+//Manejador del select
   const handleSelect = (event) => {
     const newSelect = event.target.value
     ref.current = newSelect
-    updateSearch(search)
+    
     updateSelect(newSelect)
-    //debouncedGetCommerces(newSelect)
-    //getLocalidades({ select: newSelect })
-   getCommerces({ search:search, select: newSelect })
+
+    getLocalidades({ select: newSelect })
+    getCommerces({ search:search, select: newSelect })
   
   }
   
-  // ordenar
+  // ordenar / checkbox
   const handleSort = () => {
     setSort(!sort)
   }
  
+  //Manejador del cambio de búsqueda
   const handleChange = (event) => {
     const newSearch = event.target.value
     
-    updateSelect(select)
     updateSearch(newSearch)
     debouncedGetCommerces(newSearch, ref.current)
-  
-    
-    //console.log("handleChange:" , select)
   }
 
   const { isChecked, toggleCheckbox } = useCheckbox();
@@ -170,8 +160,9 @@ function Commerce () {
           loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />
           
         }
-        <Footer localidad={select}/>
+        
       
+      <Footer select={ref.current}/>
       </main>
     </div>
 

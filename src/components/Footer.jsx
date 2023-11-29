@@ -1,23 +1,21 @@
-import footerimgs from '../assets/Footerimg.svg'
 import {searchLocalidades} from '../services/localities'
-function Footer ({localidad}) {
+
+function Footer ({select}) {
   
-      const localidadencontrada=searchLocalidades(localidad)
-     //console.log({localidadencontrada})
+    //console.log("entra al footer",localidad) ok
+      const localidadencontrada=searchLocalidades({select})
+     
      
       return (
         <div className='pt-10'>
-        <a href={localidadencontrada.link} target='_blank' rel='noreferrer'>
-      <img className='w-full' src={localidadencontrada.img.footerimg} alt='foto'/>
+        <a href={localidadencontrada.Link} target='_blank' rel='noreferrer'>
+      <img className='w-full' src={localidadencontrada.Img} alt='foto'/>
       </a>
 
       </div>
       
       )}
   
-
-  
-
 
 
   export default Footer

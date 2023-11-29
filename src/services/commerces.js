@@ -1,7 +1,11 @@
 export const searchCommerces = async ({ search, select }) => {
   try {
     const dataJson = require('..\\src\\mocks\\mock.json');
-    const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios
+    const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios 
+
+    /* const response = await fetch('/mocks/localidades.json');
+        const data = await response.json();
+        const arr = Object.values(data); */
 
     if (search === '' && (select === undefined || select === '')) {
       return arr.map(commerce => ({

@@ -1,36 +1,56 @@
 import footerimg from '../assets/Footerimg.svg'
 
-
-export const searchLocalidades =  ( {select }) => {
+const searchLocalidadesAsync =  ({ select }) => {
+    try {
+      const dataJson =  require('..\\src\\mocks\\localidades.json');
+      const arr = Object.values(dataJson);
   
-    console.log("select ", select)
-      if (select === undefined){
+      return arr[0].find(
+        (item) => item.Localidad.toLowerCase().includes(select.toLowerCase())
+      );
+      
+    } catch (e) {
+      throw new Error('Error searching');
+    }
+  };
+
+  
+  
+  export const searchLocalidades =  ( {select} ) => {
+  
+  
+    if ((select === undefined)||(select==='')) {
         
-        let localidadDef={
-            localidad:'Bahia Blanca',
-            img:{footerimg},
-            link:'https://www.coopeplus.com.ar',
-            latitud:-38.7210667,
-            longitud:-62.3387734}
-            return localidadDef
-
+        return ({
+          Localidad: 'Bahia Blanca',
+          Img:  footerimg ,
+          Link: 'https://www.coopeplus.com.ar',
+          Latitud: -38.7210667,
+          Longitud: -62.3387734,
+        });
+         
+    } else {
+      try {
+        const result =  searchLocalidadesAsync({ select });
+        if (result) {
+          return result;
+        } else {
+          // Si la búsqueda no devuelve ningún resultado, puedes devolver un valor por defecto o manejarlo de otra manera
+          return {
+            localidad: 'Valor por defecto si no se encuentra',
+            // ...otras propiedades por defecto
+          };
         }
-        else{
-            const searchLocalidadesAsync = async ({ select }) => {
-                
-                try {
-                    const dataJson = require('..\\src\\mocks\\localidades.json');
-                    //console.log("datajs ", dataJson)
-                    const arr=Object.values(dataJson)
-
-                    return arr.find(item => item.localidad.toLowerCase().includes(select.toLowerCase()))
-                    
-                  
-                }catch (e) {
-                      throw new Error('Error searching ')
-                   }
-                }
-            }
-   
-}
+      } catch (error) {
+        // Manejar el error de búsqueda asincrónica aquí
+        console.error('Error en búsqueda asincrónica: ', error);
+        // Devolver un valor por defecto o lanzar el error según sea necesario
+        return {
+          localidad: 'Valor por defecto debido a un error',
+          // ...otras propiedades por defecto
+        };
+      }
+    }
+  };
+  
 

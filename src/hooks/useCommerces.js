@@ -10,7 +10,7 @@ export function useCommerces ({ search,select, sort }) {
   const [, setError] = useState(null)
   const previousSearch = useRef(search)
   const previousLocal = useRef(select)
- console.log("usecommerce1: ", select)
+
   const getCommerces = useCallback(async ({ search, select }) => {
     /////console.log("search usecommerces2", search, "select:", select)
     if ((search === previousSearch.current) && (select === previousLocal.current)) return
@@ -23,7 +23,7 @@ export function useCommerces ({ search,select, sort }) {
       setError(null)
       previousSearch.current = search
       previousLocal.current = select
-      console.log("search usecommerces3", search, "select:", select)
+
       
       const newCommerces = await searchCommerces({ search, select })
      // console.log("newcomerces, hook:",newCommerces)
