@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Commerce from './components/Commerce';
 import Maps from './components/Maps';
 import { CheckboxProvider } from './context/CheckContext';
+import { UbicacionProvider } from './context/UbicacionContext';
 //import Dropdown from './components/Dropdown';
 
 
@@ -17,11 +18,12 @@ function App() {
     
      <Header/>
      <Slider/>
+     <UbicacionProvider>
      <CheckboxProvider>
      <Maps/>
      <Commerce/>
      </CheckboxProvider>
-    
+     </UbicacionProvider>
     </div>
   );
 }

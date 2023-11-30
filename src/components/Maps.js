@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef,useContext } from "react"
 import {
   APIProvider,
   Map,
@@ -11,14 +11,48 @@ import trees from "../threes"
 //import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
 import { useCheckbox } from '../context/CheckContext';
+import { UbicacionContext } from '../context/UbicacionContext';
+
 
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
 
-
 const Maps = () => {
-  const { isChecked } = useCheckbox();
 
+  const { isChecked } = useCheckbox();
+  const { ubicacion } = useContext(UbicacionContext);
+
+  
+
+  /* useEffect(() => {
+    
+    if (map) {
+      mapRef.current = map;
+    }
+  }, []);
+
+
+  useEffect(() => {
+    if ((mapRef.current && ubicacion && ubicacion.Latitud && ubicacion.Longitud)|| (done)){
+      mapRef.current.setCenter(ubicacion);
+      console.log(mapRef)
+    }
+    console.log("no",mapRef)
+  }, [mapRef,ubicacion]); */
+
+
+  /* useEffect(() => {
+    if (map && ubicacion) {
+      // Actualiza el mapa con la nueva ubicación
+      console.log("ln: ",ubicacion.lat,"lg: ", ubicacion.lng);
+      map.setCenter(parseFloat(ubicacion.lat), parseFloat(ubicacion.lng));
+    }
+    console.log(map)
+    
+  }, [map, ubicacion]);
+ */
+
+  
   if (isChecked) {
     return (
       <div>
@@ -32,11 +66,12 @@ const Maps = () => {
       <div style={{ height: "55vh", width: "100%" }}  id="map">
         <Map
           mapId={"bf51a910020fa25a"}
-          center={{ lat: 43.64, lng: -79.41 }}
-          zoom={10}
+          
+          zoom={14}
+          center={{lat:ubicacion.lat ,lng:ubicacion.lng }}//|| { lat: 43.64, lng: -79.41 }}
                               
         >
-          <Markers points={trees} />
+          <Markers points={trees } />
         </Map>
       </div>
     </APIProvider>
@@ -48,7 +83,7 @@ const Markers = ({ points }) => {
   const [markers, setMarkers] = useState({})
   const clusterer = useRef(null)
   const [openMarkers, setOpenMarkers] = useState({});
-
+  const { ubicacion } = useContext(UbicacionContext);
   const { isChecked } = useCheckbox();
   
 
@@ -92,6 +127,17 @@ const Markers = ({ points }) => {
     }));
   };
 
+ 
+
+  useEffect(() => {
+    if (map && ubicacion) {
+      // Actualiza el mapa con la nueva ubicación
+      console.log(ubicacion);
+      map.setCenter(ubicacion);
+    }
+    //console.log(map)
+    
+  }, [map, ubicacion]);
 
   return (
     <>
@@ -102,7 +148,7 @@ const Markers = ({ points }) => {
         </div>
       ) : (
 
-
+        <section id='Mapcomponent'>
       <div >
           {points.map(point => (
             <div key={point.key} >
@@ -112,7 +158,7 @@ const Markers = ({ points }) => {
               ref={marker => setMarkerRef(marker, point.key)}
               onClick={() => handleMarkerClick(point)}
             >
-              <span className="tree" ><img src={logo10 } className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo10"/></span>
+              <span className="tree" ><img src={logo10 } className=" max-w-[28px] min-h-[28px] max-h-[30px]" alt="logo10"/></span>
               {openMarkers[point.key] && (
                 <InfoWindow position={point} 
                 onCloseClick={() => handleMarkerClick(point)}>
@@ -128,6 +174,7 @@ const Markers = ({ points }) => {
           ))}
 
         </div>
+        </section>
        )}
       
            

@@ -3,10 +3,11 @@ export const searchCommerces = async ({ search, select }) => {
     const dataJson = require('..\\src\\mocks\\mock.json');
     const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios 
 
-    /* const response = await fetch('/mocks/localidades.json');
+    /* //cambiar a fetch para poder utilizar un archivo no compilado
+    const response = await fetch('/mocks/localidades.json');
         const data = await response.json();
-        const arr = Object.values(data); */
-
+        const arr = Object.values(data);
+ */
     if (search === '' && (select === undefined || select === '')) {
       return arr.map(commerce => ({
         id: commerce.ID,
@@ -16,6 +17,8 @@ export const searchCommerces = async ({ search, select }) => {
         direccion: commerce.Direccion,
         dto: commerce.Dto,
         provincia: commerce.Provincia,
+        latitud: commerce.Latitud,
+        longitud: commerce.Longitud,
       }));
     }
 
@@ -41,6 +44,8 @@ export const searchCommerces = async ({ search, select }) => {
       direccion: commerce.Direccion,
       dto: commerce.Dto,
       provincia: commerce.Provincia,
+      latitud: commerce.Latitud,
+      longitud: commerce.Longitud,
     }));
   } catch (e) {
     throw new Error('Error searching');

@@ -1,10 +1,22 @@
 import footerimg from '../assets/Footerimg.svg'
+//import { useState } from 'react';   
 
-const searchLocalidadesAsync =  ({ select }) => {
+
+const searchLocalidadesAsync =  ({ select }) => { //agregar async en fetch
+
     try {
-      const dataJson =  require('..\\src\\mocks\\localidades.json');
-      const arr = Object.values(dataJson);
-  
+
+        const dataJson =  require('..\\src\\mocks\\localidades.json');
+         const arr = Object.values(dataJson);
+
+        
+       /*  //cambiar a fetch para poder utilizar un archivo no compilado
+        const response = await fetch('/mocks/localidades.json');
+        const data = await response.json();
+        const arr = Object.values(data); */
+        
+        //console.log(arr[0]);
+     
       return arr[0].find(
         (item) => item.Localidad.toLowerCase().includes(select.toLowerCase())
       );
@@ -53,4 +65,3 @@ const searchLocalidadesAsync =  ({ select }) => {
     }
   };
   
-

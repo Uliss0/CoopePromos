@@ -1,15 +1,21 @@
-import {useEffect, useState} from "react"
 import picture from '../assets/picture.jpg'
-
-
+import React, { useContext } from 'react';
+import { UbicacionContext } from '../context/UbicacionContext';
 
 
 export function Card({ commerce, onClose }){
+  const { setUbicacion } = useContext(UbicacionContext);
     const handleClose = () => {
         
         onClose(null);
       };
 
+      const handleClick = () => {
+       const ubicacion={lat:commerce.latitud, lng:commerce.longitud,zoom:15}
+
+        setUbicacion(ubicacion);
+        handleClose();
+      };
     
     return(
         <div className="items-center grid place-content-center "  >
@@ -34,9 +40,9 @@ export function Card({ commerce, onClose }){
                                             <p>{commerce.direccion} 📌</p>
                                             <p>{commerce.localidad}</p>
                                             
-                                            <button type='submit' 
+                                           <a href='#Mapcomponent'> <button type='submit' onClick={handleClick}
             className='  m-4 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg  px-5 py-2.5 text-center 
-            '>Mostrar en Mapa</button>
+            '>Mostrar en Mapa</button></a>
             </div></span>
         </div>
         </div>

@@ -486,7 +486,8 @@ const trees = [
     ["Spruce, white", 43.8035815391046, -79.3470094880854],
     ["Katsura, Japanese", 43.8183980896511, -79.232631623985],
     ["Spruce, Colorado blue", 43.7224527918433, -79.4339452946535],
-    ["Horsechestnut", 43.7141250143013, -79.4121426520126]
+    ["Horsechestnut", 43.7141250143013, -79.4121426520126],
+    ["SURFSHOP BAMBACI", -38.88022604, -62.07417782]
   ]
   
   const formatted = trees.map(([name, lat, lng]) => ({
