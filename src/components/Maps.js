@@ -8,7 +8,7 @@ import {
 } from "@vis.gl/react-google-maps"
 import { MarkerClusterer,SuperClusterAlgorithm } from "@googlemaps/markerclusterer"
 import trees from "../threes"
-//import logo15 from '../assets/15c.png'
+import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
 import { useCheckbox } from '../context/CheckContext';
 import { UbicacionContext } from '../context/UbicacionContext';
@@ -22,7 +22,7 @@ const Maps = () => {
   const { isChecked } = useCheckbox();
   const { ubicacion } = useContext(UbicacionContext);
 
-  
+
 
   /* useEffect(() => {
     
@@ -66,10 +66,8 @@ const Maps = () => {
       <div style={{ height: "55vh", width: "100%" }}  id="map">
         <Map
           mapId={"bf51a910020fa25a"}
-          
           zoom={14}
           center={{lat:ubicacion.lat ,lng:ubicacion.lng }}//|| { lat: 43.64, lng: -79.41 }}
-                              
         >
           <Markers points={trees } />
         </Map>
@@ -132,13 +130,11 @@ const Markers = ({ points }) => {
   useEffect(() => {
     if (map && ubicacion) {
       // Actualiza el mapa con la nueva ubicación
-      console.log(ubicacion);
       map.setCenter(ubicacion);
     }
-    //console.log(map)
-    
   }, [map, ubicacion]);
-
+  let descuento=null;
+  
   return (
     <>
       
@@ -151,6 +147,7 @@ const Markers = ({ points }) => {
         <section id='Mapcomponent'>
       <div >
           {points.map(point => (
+            descuento=point.descuento===15?logo15:logo10,
             <div key={point.key} >
             <AdvancedMarker
               position={point}
@@ -158,13 +155,15 @@ const Markers = ({ points }) => {
               ref={marker => setMarkerRef(marker, point.key)}
               onClick={() => handleMarkerClick(point)}
             >
-              <span className="tree" ><img src={logo10 } className=" max-w-[28px] min-h-[28px] max-h-[30px]" alt="logo10"/></span>
+              <span className="tree" ><img  src={descuento}  className=" max-w-[28px] min-h-[28px] max-h-[30px]" alt="logo"/></span>
               {openMarkers[point.key] && (
                 <InfoWindow position={point} 
                 onCloseClick={() => handleMarkerClick(point)}>
-                  <p>I'm in </p>
-                  <p>{point.name}</p>
-                  <p>Direccion: Fitz Roy 140</p>
+                 
+                  <p>Nombre:<strong>{point.nombreComercio}</strong></p>
+                  <p>Direccion: <strong>{point.direccion}</strong></p>
+                  <p>Telefono:<strong>{point.prefijo}-{point.telefono}</strong></p>
+                  <p>Descuento:<strong>-%{point.descuento}</strong></p>
                 </InfoWindow>
               )}
             </AdvancedMarker>

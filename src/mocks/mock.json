@@ -43,7 +43,7 @@
             "ID":3,
             "Direccion": "AV. ROCA 301",
             "Dto": 15,
-            "Localidad": "BAHIA BLANCA",
+            "Localidad": "ALLEN",
             "NomComercio": "LOREDANA",
             "NroTel": 4451827,
             "Prefijo": 298,
@@ -76,6 +76,32 @@
             "Rubro": "INDUMENTARIA",
             "Latitud": -36.77978393,
             "Longitud": -59.86112476,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "ID":6,
+            "Direccion": "AV. ALEM 150",
+            "Dto": 10,
+            "Localidad": "BAHIA BLANCA",
+            "NomComercio": "MULATO Café & Pastelería",
+            "NroTel": 633996,
+            "Prefijo": 2281,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.7092228,
+            "Longitud": -62.2631479,
+            "Provincia": "Buenos Aires"
+        },
+        {
+            "ID":7,
+            "Direccion": "AV. COLON 580",
+            "Dto": 15,
+            "Localidad": "BAHIA BLANCA",
+            "NomComercio": "El Mundo de la Comida",
+            "NroTel": 633996,
+            "Prefijo": 2281,
+            "Rubro": "INDUMENTARIA",
+            "Latitud": -38.7226051,
+            "Longitud": -62.2726677,
             "Provincia": "Buenos Aires"
         }
         

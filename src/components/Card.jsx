@@ -37,7 +37,7 @@ export function Card({ commerce, onClose }){
                                             
                                             <p className="text-sm text-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem, est architecto dolorum accusamus culpa incidunt, porro vitae aliquam nulla voluptatibus! Ratione natus, quam obcaecati ducimus nemo necessitatibus numquam provident.</p>
                                             <br></br>
-                                            <p>{commerce.direccion} 📌</p>
+                                            <div className='flex justify-evenly'><p>{commerce.direccion} 📌</p>|<p>{commerce.prefijo}-{commerce.telefono} 📞</p></div>
                                             <p>{commerce.localidad}</p>
                                             
                                            <a href='#Mapcomponent'> <button type='submit' onClick={handleClick}

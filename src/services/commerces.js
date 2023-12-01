@@ -19,6 +19,8 @@ export const searchCommerces = async ({ search, select }) => {
         provincia: commerce.Provincia,
         latitud: commerce.Latitud,
         longitud: commerce.Longitud,
+        telefono:commerce.NroTel,
+        prefijo:commerce.Prefijo
       }));
     }
 
@@ -46,6 +48,8 @@ export const searchCommerces = async ({ search, select }) => {
       provincia: commerce.Provincia,
       latitud: commerce.Latitud,
       longitud: commerce.Longitud,
+      telefono:commerce.NroTel,
+      prefijo:commerce.Prefijo
     }));
   } catch (e) {
     throw new Error('Error searching');
