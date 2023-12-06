@@ -7,6 +7,8 @@ import {useLocalities} from '../hooks/useLocalities.js'
 import { Commerces } from './Commerces.jsx'
 import Footer from './Footer.jsx';
 import debounce from 'just-debounce-it'
+//import Dropdown from './Dropdown.jsx';
+//import SideBar from './SideBar.js';
 
 function useSearch () {
   const [search, updateSearch] = useState('')
@@ -46,11 +48,20 @@ function useSelect () {
   return {select, updateSelect}
 }
 
+function useSelectR () {
+const [ selectR,  updateSelectR ] = useState('')
+return {selectR, updateSelectR}
+}
+
 function Commerce () {
+
   const [sort, setSort] = useState(false)
   const { search, updateSearch, error } = useSearch()
   const { select,  updateSelect } = useSelect()  
-  const { commerces, loading, getCommerces } = useCommerces({ search,select ,sort})
+  const { selectR,  updateSelectR } = useSelectR()  
+  
+  const { commerces, loading, getCommerces } = useCommerces({ search,select,selectR ,sort})
+  
   const { localidad, getLocalidades } = useLocalities({select})
   
   let ref = useRef('');
@@ -65,7 +76,6 @@ function Commerce () {
 //Manejador del submit del formulario
   const handleSubmit = (event) => {
     event.preventDefault()
-    
     handleSelect(ref.current)
     //getLocalidades({ select: ref.current })
     debouncedGetCommerces(search, ref.current)
@@ -75,11 +85,9 @@ function Commerce () {
   const handleSelect = (event) => {
     const newSelect = event.target.value
     ref.current = newSelect
-    
     updateSelect(newSelect)
-
     getLocalidades({ select: newSelect })
-    getCommerces({ search:search, select: newSelect })
+    getCommerces({ search:search, select: newSelect, selectR: selectR   })
   
   }
   
@@ -91,41 +99,52 @@ function Commerce () {
   //Manejador del cambio de búsqueda
   const handleChange = (event) => {
     const newSearch = event.target.value
-    
     updateSearch(newSearch)
     debouncedGetCommerces(newSearch, ref.current)
   }
 
   const { isChecked, toggleCheckbox } = useCheckbox();
+    const handleCheckboxChange = () => {
+      toggleCheckbox();
+    };
 
-  const handleCheckboxChange = () => {
-    toggleCheckbox();
-  };
-
-
+  //controlando dropdownRubro
+  const handleSelectRubro = (event) => {
+    const selectR = event.target.value
+    updateSelectR(selectR)
+    //updateSelectRubro(newSelect)
+   
+    getCommerces({ search:search, select: select, selectR: selectR  })
+  
+  }
+  
   return (
     <div className='page'>
 
       <header className='   w-full'>
-        <div className=' z-50 p-8 m-8 mt-[10px]  shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
-          <form className='form flex xl:flex-row md:flex-col sm:flex-col xs:flex-col xxs:flex-col' onSubmit={handleSubmit} id='formlist' >
+        <div className=' z-50 p-8 m-8   rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
+          <form className='form flex  md:flex-col sm:flex-col xs:flex-col xxs:flex-col xxs:items-stretch ' onSubmit={handleSubmit} id='formlist' >
+             {/* 
             <input
               className=' bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
               m-4 p-4" >'
               onChange={handleChange} value={search} name='query' placeholder='Buscar' autoComplete="off"
-            />
+            /> */ }
             
+            {/* 
             <div className="flex items-center mb-4">
               <input id="default-checkbox" type="checkbox" value="" className=" gap-y-4 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               
-              onChange={handleSort} checked={sort}
+              onChange={handleSort} checked={sort} 
               />
               
               <label forhtml="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">Ordenar</label>
-            </div>
+            </div> */ }
             
+
+
             <select name="localidad" id="localidad" onChange={handleSelect} value={select} 
-            className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+            className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
             <option value="">Localidad</option>
             <optgroup label="Buenos Aires">
             <option value="Bahia Blanca">Bahia Blanca</option>
@@ -137,6 +156,36 @@ function Commerce () {
             <option value="Villa Maria">Villa Maria</option>
             </optgroup>
             </select>
+            {/*input+dropdown rubro */}
+            <div className=" relative w-auto">
+                <div className="flex ">
+                  <select
+                    id="rubro" name="rubro" onChange={handleSelectRubro} value={selectR} 
+                    className="  inline-flex items-center  text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    >
+                    <option value="">Rubro</option>
+                    <option value="Indumentaria">Indumentaria</option>
+                    <option value="Deportes">Deportes</option>
+                    <option value="Comida">Comida</option>
+                    <option value="Regaleria">Regaleria</option>
+                    <option value="Electrodomesticos">Electrodomesticos</option>
+                  </select>
+                  <div className="relative w-full">
+                            <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar Comercio" 
+                             onChange={handleChange} value={search} name='query' autoComplete="off"/>
+                            <div type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                                
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+              {/*endsection */}
+
             <div className='p-2'id='checkMap'>
             <label className="relative inline-flex cursor-pointer items-center ">
             <input id="switch2" type="checkbox" className="peer sr-only" checked={isChecked}
@@ -149,6 +198,7 @@ function Commerce () {
               <label className='text-xs '>Mapa</label>
               </div>
           </div>
+          
           </form>
        
         {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -161,7 +211,7 @@ function Commerce () {
           
         }
         
-      
+
       <Footer select={ref.current}/>
       </main>
     </div>

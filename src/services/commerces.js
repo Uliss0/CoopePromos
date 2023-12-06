@@ -1,4 +1,4 @@
-export const searchCommerces = async ({ search, select }) => {
+export const searchCommerces = async ({ search, select, selectR }) => {
   try {
     const dataJson = require('..\\src\\mocks\\mock.json');
     const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios 
@@ -8,7 +8,7 @@ export const searchCommerces = async ({ search, select }) => {
         const data = await response.json();
         const arr = Object.values(data);
  */
-    if (search === '' && (select === undefined || select === '')) {
+    if (search === '' && (select === undefined || select === '')&&(selectR === undefined || selectR === '') ) {
       return arr.map(commerce => ({
         id: commerce.ID,
         nomComercio: commerce.NomComercio,
@@ -38,6 +38,11 @@ export const searchCommerces = async ({ search, select }) => {
       );
     }
 
+    if (selectR  !== '') {
+      filteredCommerces = filteredCommerces.filter(item =>
+        item.Rubro.toLowerCase().includes(selectR.toLowerCase())
+      );
+    }
     return filteredCommerces.map(commerce => ({
       id: commerce.ID,
       nomComercio: commerce.NomComercio,

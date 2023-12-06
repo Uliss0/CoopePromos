@@ -163,7 +163,7 @@ const Markers = ({ points }) => {
                   <p>Nombre:<strong>{point.nombreComercio}</strong></p>
                   <p>Direccion: <strong>{point.direccion}</strong></p>
                   <p>Telefono:<strong>{point.prefijo}-{point.telefono}</strong></p>
-                  <p>Descuento:<strong>-%{point.descuento}</strong></p>
+                  <p>Descuento:<strong>%{point.descuento}</strong></p>
                 </InfoWindow>
               )}
             </AdvancedMarker>

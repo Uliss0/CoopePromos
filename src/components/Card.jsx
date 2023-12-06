@@ -1,7 +1,8 @@
 import picture from '../assets/picture.jpg'
 import React, { useContext } from 'react';
 import { UbicacionContext } from '../context/UbicacionContext';
-
+import { FaPhone } from "react-icons/fa";
+import { MdLocationPin } from "react-icons/md";
 
 export function Card({ commerce, onClose }){
   const { setUbicacion } = useContext(UbicacionContext);
@@ -22,7 +23,7 @@ export function Card({ commerce, onClose }){
         <div className="card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <div className="bg-white ">
             <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
-              <div className="bg-red-500 text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] ">{commerce.dto}% dto</div>
+              <div className={`${commerce.dto===10? 'bg-red-500' :'bg-blue-700'} text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] `}>{commerce.dto}% dto</div>
                 <img
                   className="  max-h-[200px] max-w-[200px] items-center inline-flex pt-2 p-b-0 "
                   src={picture}
@@ -37,7 +38,7 @@ export function Card({ commerce, onClose }){
                                             
                                             <p className="text-sm text-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem, est architecto dolorum accusamus culpa incidunt, porro vitae aliquam nulla voluptatibus! Ratione natus, quam obcaecati ducimus nemo necessitatibus numquam provident.</p>
                                             <br></br>
-                                            <div className='flex justify-evenly'><p>{commerce.direccion} 📌</p>|<p>{commerce.prefijo}-{commerce.telefono} 📞</p></div>
+                                            <div className='flex justify-around text-sm'><MdLocationPin/><p>{commerce.direccion} </p> |<FaPhone/><p>{commerce.prefijo}-{commerce.telefono} </p></div>
                                             <p>{commerce.localidad}</p>
                                             
                                            <a href='#Mapcomponent'> <button type='submit' onClick={handleClick}

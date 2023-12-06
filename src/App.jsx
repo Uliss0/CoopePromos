@@ -13,8 +13,9 @@ import { UbicacionProvider } from './context/UbicacionContext';
 
 
 function App() {
+  //celeste #a6c1ee // blanco #f8f9fc // rosa #fbc2eb
   return (
-    <div className="App  bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen[100%] ">
+    <div className="App  bg-gradient-to-t from-[#f8f9fc] to-[#a6c1ee] h-screen[100%] ">
     
      <Header/>
      <Slider/>
@@ -24,6 +25,7 @@ function App() {
      <Commerce/>
      </CheckboxProvider>
      </UbicacionProvider>
+     
     </div>
   );
 }
