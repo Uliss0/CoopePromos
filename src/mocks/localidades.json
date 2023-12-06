@@ -3,8 +3,8 @@
         {
             "ID":0,
             "Localidad": "Bahia Blanca",
-            "Latitud": -38.7210667,
-            "Longitud": -62.3387734,
+            "Latitud": -38.7153823,
+            "Longitud": -62.2657772,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-obtener-tarjeta.jpg",
             "Link":"https://youtube.com"
@@ -13,8 +13,8 @@
         {
             "ID":1,
             "Localidad": "Punta Alta",
-            "Latitud": -38.871932,
-            "Longitud": -62.1103308,
+            "Latitud": -38.8754402,
+            "Longitud": -62.0713637,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"

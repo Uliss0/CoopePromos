@@ -13,9 +13,9 @@ import { UbicacionProvider } from './context/UbicacionContext';
 
 
 function App() {
-  //celeste #a6c1ee // blanco #f8f9fc // rosa #fbc2eb
+  //celeste #a6c1ee // blanco #f8f9fc // rosa #fbc2eb // bg-gradient-to-t from-[#f8f9fc] to-[#a6c1ee] h-screen[100%]
   return (
-    <div className="App  bg-gradient-to-t from-[#f8f9fc] to-[#a6c1ee] h-screen[100%] ">
+    <div className="App  bg-[#e1e4e7] ">
     
      <Header/>
      <Slider/>

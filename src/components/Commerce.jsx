@@ -1,12 +1,14 @@
 import '../App.css'
 import './Commerce.css'
-import { useState,  useCallback,useRef } from 'react'
+import { useState,  useCallback,useRef ,useContext} from 'react'
 import { useCommerces } from '../hooks/useCommerces.js'
 import { useCheckbox } from '../context/CheckContext.js';
 import {useLocalities} from '../hooks/useLocalities.js'
 import { Commerces } from './Commerces.jsx'
 import Footer from './Footer.jsx';
 import debounce from 'just-debounce-it'
+import { UbicacionContext } from '../context/UbicacionContext';
+import { searchLocalidades } from '../services/localities.js';
 //import Dropdown from './Dropdown.jsx';
 //import SideBar from './SideBar.js';
 
@@ -54,7 +56,7 @@ return {selectR, updateSelectR}
 }
 
 function Commerce () {
-
+  const { setUbicacion } = useContext(UbicacionContext);
   const [sort, setSort] = useState(false)
   const { search, updateSearch, error } = useSearch()
   const { select,  updateSelect } = useSelect()  
@@ -81,14 +83,18 @@ function Commerce () {
     debouncedGetCommerces(search, ref.current)
   }
 
-//Manejador del select
+//Manejador del select -  parte del buscador
   const handleSelect = (event) => {
     const newSelect = event.target.value
     ref.current = newSelect
     updateSelect(newSelect)
     getLocalidades({ select: newSelect })
     getCommerces({ search:search, select: newSelect, selectR: selectR   })
-  
+    
+    //control muestra el mapa por localidad
+    const localidadCentral=searchLocalidades({ select: newSelect })
+    const ubicacion={lat:localidadCentral.Latitud, lng:localidadCentral.Longitud,zoom:15}
+    setUbicacion(ubicacion);
   }
   
   // ordenar / checkbox
@@ -112,15 +118,13 @@ function Commerce () {
   const handleSelectRubro = (event) => {
     const selectR = event.target.value
     updateSelectR(selectR)
-    //updateSelectRubro(newSelect)
-   
     getCommerces({ search:search, select: select, selectR: selectR  })
-  
-  }
+
+    
+    }
   
   return (
     <div className='page'>
-
       <header className='   w-full'>
         <div className=' z-50 p-8 m-8   rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
           <form className='form flex  md:flex-col sm:flex-col xs:flex-col xxs:flex-col xxs:items-stretch ' onSubmit={handleSubmit} id='formlist' >
@@ -161,7 +165,7 @@ function Commerce () {
                 <div className="flex ">
                   <select
                     id="rubro" name="rubro" onChange={handleSelectRubro} value={selectR} 
-                    className="  inline-flex items-center  text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    className="  inline-flex items-center  text-sm font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                     >
                     <option value="">Rubro</option>
                     <option value="Indumentaria">Indumentaria</option>
@@ -184,7 +188,7 @@ function Commerce () {
                 </div>
 
             </div>
-              {/*endsection */}
+              {/*endrubros */}
 
             <div className='p-2'id='checkMap'>
             <label className="relative inline-flex cursor-pointer items-center ">

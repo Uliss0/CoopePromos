@@ -25,7 +25,7 @@ function ListOfCommerces ({ commerces }) {
               <li className='commerce gap-12 ' key={commerce.id} value={commerce.id} >
                 <div 
 
-              className=" max-w-[360px] xxs:min-w-[360px] md:min-w-[220px] sm:min-w-[220px]  rounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] dark:bg-white
+              className=" max-w-[360px] xxs:min-w-[360px] md:min-w-[220px] sm:min-w-[220px]  rounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[rgba(7,_65,_210,_0.2)_0px_9px_20px] dark:bg-white
               hover:scale-105 transition-all  duration-400 cursor-pointer flex flex-row md:flex-col sm:flex-col" onClick={() => handleCommerceClick(commerce)}>
               <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
               <div className={`${commerce.dto===10? 'bg-red-500' :'bg-blue-700'} text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px]` }>{commerce.dto}% dto</div>
