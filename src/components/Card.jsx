@@ -1,4 +1,4 @@
-import picture from '../assets/picture.jpg'
+import picture from '../assets/picture.png'
 import React, { useContext } from 'react';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { FaPhone } from "react-icons/fa";
@@ -21,7 +21,7 @@ export function Card({ commerce, onClose }){
     return(
         <div className="items-center grid place-content-center "  >
         <div className="card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-            <div className="bg-white ">
+            <div className=" ">
             <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
               <div className={`${commerce.dto===10? 'bg-red-500' :'bg-blue-700'} text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] `}>{commerce.dto}% dto</div>
                 <img
@@ -32,11 +32,11 @@ export function Card({ commerce, onClose }){
                         <span className="bg-white rounded-tr-lg rounded-br-lg"><div className="justify-end flex mr-4"><button onClick={handleClose} > ✖ </button></div>  <div className="border-b-[2px] border-blue-500 font-bold mt-6"><div className="flex flex-row justify-center"><h1 className="text-2xl bold items-center">{commerce.nomComercio}</h1></div></div>
                           
                                             <div className="max-w-[350px] ">
-                                                <br></br>
-                                            <h2 className="text-left text-lg">{commerce.rubro}</h2>   
-                                            <br></br> 
+                                                
+                                            <h2 className="text-center text-lg mt-2">{commerce.rubro}</h2>   
                                             
-                                            <p className="text-sm text-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem, est architecto dolorum accusamus culpa incidunt, porro vitae aliquam nulla voluptatibus! Ratione natus, quam obcaecati ducimus nemo necessitatibus numquam provident.</p>
+                                            
+                                            <p className="text-sm text-left mx-4 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem, est architecto dolorum accusamus culpa incidunt, porro vitae aliquam nulla voluptatibus! Ratione natus, quam obcaecati ducimus nemo necessitatibus numquam provident.</p>
                                             <br></br>
                                             <div className='flex justify-around text-sm'><MdLocationPin/><p>{commerce.direccion} </p> |<FaPhone/><p>{commerce.prefijo}-{commerce.telefono} </p></div>
                                             <p>{commerce.localidad}</p>

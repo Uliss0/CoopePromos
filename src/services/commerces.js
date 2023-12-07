@@ -32,13 +32,13 @@ export const searchCommerces = async ({ search, select, selectR }) => {
       );
     }
 
-    if (select  !== '') {
+    if (select.current  !== "") {
       filteredCommerces = filteredCommerces.filter(item =>
         item.Localidad.toLowerCase().includes(select.toLowerCase())
       );
     }
 
-    if (selectR  !== '') {
+    if (selectR.current  !== "") {
       filteredCommerces = filteredCommerces.filter(item =>
         item.Rubro.toLowerCase().includes(selectR.toLowerCase())
       );

@@ -37,8 +37,8 @@ const searchLocalidadesAsync =  ({ select }) => { //agregar async en fetch
           Localidad: 'Bahia Blanca',
           Img:  footerimg ,
           Link: 'https://www.coopeplus.com.ar',
-          Latitud: -38.7210667,
-          Longitud: -62.3387734,
+          Latitud: -38.7153823,
+          Longitud: -62.2657772,
         });
          
     } else {
