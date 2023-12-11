@@ -3,7 +3,6 @@ import "./Commerce.css";
 import { useState, useCallback, useRef, useContext } from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
-import { useLocalities } from "../hooks/useLocalities.js";
 import { Commerces } from "./Commerces.jsx";
 import Footer from "./Footer.jsx";
 import debounce from "just-debounce-it";
@@ -11,38 +10,11 @@ import { UbicacionContext } from "../context/UbicacionContext";
 import { searchLocalidades } from "../services/localities.js";
 import { FiChevronDown,FiChevronUp  } from "react-icons/fi";
 
-//import Dropdown from './Dropdown.jsx';
-//import SideBar from './SideBar.js';
 
 function useSearch() {
   const [search, updateSearch] = useState("");
   const [error, setError] = useState(null);
-  //const isFirstInput = useRef(true)
-
-  /*
   
-  useEffect(() => {
-    
-    if (isFirstInput.current) {
-      isFirstInput.current = search === ''
-      
-      return
-    } 
-
-    if (search === '') {
-      setError('No se puede buscar  vacía')
-      return
-    }
-
-
-    if (search.length < 3) {
-      setError('La búsqueda debe tener al menos 3 caracteres')
-      return
-    }
-
-    setError(null)
-  }, [search])  
-*/
   return { search, updateSearch, error };
 }
 
@@ -70,8 +42,6 @@ function Commerce() {
     sort,
   });
 
-  //const { localidad, getLocalidades } = useLocalities({select})
-
   let refselect = useRef("");
   let refselectR = useRef("");
 
@@ -89,9 +59,6 @@ function Commerce() {
   //Manejador del submit del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
-    //handleSelect(refselect.current)
-    //handleSelectRubro(refselectR.current)//esto se esta haciendo mas d e una vez
-    //getLocalidades({ select: ref.current })
     debouncedGetCommerces({
       search: search,
       select: refselect.current,
@@ -104,7 +71,6 @@ function Commerce() {
     const newSelect = event.target.value;
     refselect.current = newSelect;
     updateSelect(newSelect);
-    //getLocalidades({ select: newSelect })
     getCommerces({
       search: search,
       select: newSelect,
@@ -131,6 +97,7 @@ function Commerce() {
     const newSearch = event.target.value;
     updateSearch(newSearch);
     debouncedGetCommerces(newSearch, refselect.current, refselectR.current);
+    
   };
 
   const { isChecked, toggleCheckbox } = useCheckbox();
@@ -141,7 +108,7 @@ function Commerce() {
   //controlando dropdownRubro
   const handleSelectRubro = (event) => {
     const selectR = event.target.value;
-    //updateSelectR(selectR)
+    updateSelectR(selectR)
     refselectR.current = selectR;
     getCommerces({
       search: search,
@@ -150,6 +117,7 @@ function Commerce() {
     });
   };
 
+  //muestra filtros
   const manejarClick = () => {
     setMostrarDiv(!mostrarDiv);
   };
@@ -157,35 +125,19 @@ function Commerce() {
   return (
     <div className="page">
       <header className="   w-full">
-        <div className=" z-50 p-8 m-8   rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
+        <div className="  p-6 xs:m-8 xxs:m-2   rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
           <form
             className="form flex  md:flex-col sm:flex-col xs:flex-col xxs:flex-col xxs:items-stretch "
             onSubmit={handleSubmit}
             id="formlist"
           >
-            {/* 
-            <input
-              className=' bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
-              m-4 p-4" >'
-              onChange={handleChange} value={search} name='query' placeholder='Buscar' autoComplete="off"
-            /> */}
-
-            {/* 
-            <div className="flex items-center mb-4">
-              <input id="default-checkbox" type="checkbox" value="" className=" gap-y-4 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              
-              onChange={handleSort} checked={sort} 
-              />
-              
-              <label forhtml="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">Ordenar</label>
-            </div> */}
 
             <select
               name="localidad"
               id="localidad"
               onChange={handleSelect}
               value={select}
-              className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-auto p-2.5 dark:bg-gray-300  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option value="">Localidad</option>
               <optgroup label="Buenos Aires">
@@ -199,14 +151,14 @@ function Commerce() {
               </optgroup>
             </select>
             {/*input+dropdown rubro */}
-            <div className=" relative w-auto">
-              <div className="flex ">
+            <div className=" relative w-auto pt-3">
+              <div className="flex">
                 <select
                   id="rubro"
                   name="rubro"
                   onChange={handleSelectRubro}
                   value={selectR}
-                  className="  inline-flex items-center  text-sm font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                  className=" z-0  inline-flex items-center  text-sm font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800 "
                 >
                   <option value="">Rubro</option>
                   <option value="Indumentaria">Indumentaria</option>
@@ -219,7 +171,7 @@ function Commerce() {
                   <input
                     type="search"
                     id="search-dropdown"
-                    className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                    className="block p-2.5 w-full z-10 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-s-gray-400   dark:placeholder-gray-500 dark:text-gray-700 dark:focus:border-blue-500"
                     placeholder="Buscar Comercio"
                     onChange={handleChange}
                     value={search}
@@ -228,7 +180,7 @@ function Commerce() {
                   />
                   <button
                     type="submit"
-                    className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-[#4273b4] rounded-e-lg border border-[#4273b4] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-[#4273b4] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     <svg
                       className="w-4 h-4"
@@ -251,16 +203,16 @@ function Commerce() {
             </div>
             {/*endrubros */}
             {/*filtros */}
-            <div className="pt-4">
+            <div className=" transition-all ease-in-out duration-500 pt-2">
+            
               
-
               <div
-                className={`min-h-[50px] min-w-full  transition-all ease-in-out duration-500  rounded-lg bg-[#374151] text-white ${
-                  mostrarDiv ? "visible" : "hidden"
+                className={`min-h-[50px] min-w-full  transition-all ease-in-out duration-500 -z-50  rounded-lg  text-dark ${
+                  mostrarDiv ? "opacity-100 translate-y-0 z-10" : "opacity-0 -translate-y-full select-none -z-10 invisible hidden"//quitar hidden para tener animacion
                 }`}
               >
-                <div className="transition-all ease-in-out duration-500 grid grid-flow-col  gap-2">
-                  <div className="p-2" id="check10">
+                <div className=" grid grid-flow-col  gap-2">
+                  <div className="p-2 transition-all ease-in-out duration-500" id="check10">
                     <label className="relative inline-flex cursor-pointer items-center ">
                       <input
                         id="switch1"
@@ -270,7 +222,7 @@ function Commerce() {
                         onChange={""}
                       />
                       <label htmlFor="switch1" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <div className="peer h-4 w-11 rounded-full border bg-[#4273b4] after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
                     </label>
                     <div>
                       <label className="text-xs ">10% Dto</label>
@@ -286,77 +238,61 @@ function Commerce() {
                         onChange={""}
                       />
                       <label htmlFor="switch2" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <div className="peer h-4 w-11 rounded-full border bg-[#4273b4] after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
                     </label>
                     <div>
                       <label className="text-xs ">15% Dto</label>
                     </div>
                   </div>
 
-                  <div className="p-2" id="check20">
+                  <div className="p-2" id="checkmap">
                     <label className="relative inline-flex cursor-pointer items-center ">
                       <input
                         id="switch3"
                         type="checkbox"
                         className="peer sr-only"
                         defaultChecked={isChecked}
-                        onChange={""}
+                        onChange={handleCheckboxChange}
                       />
                       <label htmlFor="switch3" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-                    </label>
-                    <div>
-                      <label className="text-xs ">20% Dto</label>
-                    </div>
-                  </div>
-
-                  <div className="p-2" id="checkmap">
-                    <label className="relative inline-flex cursor-pointer items-center ">
-                      <input
-                        id="switch4"
-                        type="checkbox"
-                        className="peer sr-only"
-                        defaultChecked={isChecked}
-                        onChange={""}
-                      />
-                      <label htmlFor="switch4" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <div className="peer h-4 w-11 rounded-full border bg-[#4273b4] after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
                     </label>
                     <div>
                       <label className="text-xs ">Mapa</label>
                     </div>
                   </div>
+
+                  <div className="p-2" id="checkOrden">
+                    <label className="relative inline-flex cursor-pointer items-center ">
+                      <input
+                        id="switch4"
+                        type="checkbox"
+                        className="peer sr-only"
+                        onChange={handleSort} checked={sort} 
+                      />
+                      <label htmlFor="switch4" className="hidden"></label>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                    </label>
+                    <div>
+                      <label className="text-xs ">Ordenar</label>
+                    </div>
+                  </div>
                 </div>
                 
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center pt-1">
                 <button
                   onClick={manejarClick}
-                  className='min-h-fit min-w-fit grid items-center mt-4  '
+                  className='min-h-fit min-w-fit grid items-center  z-0 rounded-2xl bg-[#4273b4] shadow-[0_2px_15px_-3px_rgba(66, 115, 180,0.20),0_10px_20px_-2px_rgba(66, 115, 180,0.04)]'
                 >
-                  {mostrarDiv ? <FiChevronUp className="min-h-[30px] min-w-[30px]" /> : <FiChevronDown  className="min-h-[30px] min-w-[30px]" />}
+                  {mostrarDiv ? <FiChevronUp className="min-h-[30px] min-w-[30px] text-white " /> : <FiChevronDown  className="min-h-[30px] min-w-[30px] text-white " />}
                   
-                  <p className="text-sm"> Filtros</p>
-                </button>
+                  <p className="text-sm"> </p>
+                </button> 
               </div>
+                <p className="text-center text-xs" >Filtros</p>
             </div>
-                {/* 
-            <div className="p-2" id="checkMap">
-              <label className="relative inline-flex cursor-pointer items-center ">
-                <input
-                  id="switch2"
-                  type="checkbox"
-                  className="peer sr-only"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="switch2" className="hidden"></label>
-                <div className="peer h-4 w-11 rounded-full border bg-blue-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gray-400 peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-              </label>
-              <div>
-                <label className="text-xs ">Mapa</label>
-              </div>
-            </div>*/}
+
           </form>
 
           {error && <p style={{ color: "red" }}>{error}</p>}

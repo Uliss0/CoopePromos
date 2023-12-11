@@ -19,8 +19,8 @@ export function Card({ commerce, onClose }){
       };
     
     return(
-        <div className="items-center grid place-content-center "  >
-        <div className="card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
+        <div className="items-center grid place-content-center"  >
+        <div className=" card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <div className=" ">
             <div className="relative  bg-cover bg-no-repeat rounded-t-sm">
               <div className={`${commerce.dto===10? 'bg-red-500' :'bg-blue-700'} text-white absolute w-1/2 text-center top-0 left-1/4 rounded-2xl mt-[-8px] `}>{commerce.dto}% dto</div>
