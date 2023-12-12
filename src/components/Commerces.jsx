@@ -5,7 +5,7 @@ import Card from './Card';
 
 function ListOfCommerces ({ commerces }) {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
-
+  
   const handleCommerceClick = (commerce) => {
     setSelectedCommerce(commerce);
   };

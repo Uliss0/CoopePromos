@@ -14,7 +14,7 @@ export function useCommerces ({ search,select,selectR, sort }) {
 
   const getCommerces = useCallback(async ({ search, select,selectR }) => {
     /////console.log("search usecommerces2", search, "select:", select)
-    if ((search === previousSearch.current) && (select === previousLocal.current) && (selectR === previousLocalR.current)) return
+    //if ((search === previousSearch.current) && (select === previousLocal.current) && (selectR === previousLocalR.current)) return
     // search es ''
     
     try {

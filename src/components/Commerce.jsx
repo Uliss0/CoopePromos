@@ -1,6 +1,6 @@
 import "../App.css";
 import "./Commerce.css";
-import { useState, useCallback, useRef, useContext } from "react";
+import { useState, useCallback, useRef, useContext ,useEffect} from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
 import { Commerces } from "./Commerces.jsx";
@@ -122,6 +122,46 @@ function Commerce() {
     setMostrarDiv(!mostrarDiv);
   };
 
+
+//#region precarga de datos
+  const [localidades, setLocalidades] = useState([]);
+  const [rubros, setRubros] = useState([]);
+  const [localidadSeleccionada, setLocalidadSeleccionada] = useState(null);
+
+  const isFirstInput = useRef(true)
+  
+
+  useEffect(() => {
+    
+    if (isFirstInput.current) {
+      getCommerces({ search:"", select:"", selectR:"" })
+      isFirstInput.current = false   
+      
+      return
+    } },[])
+    
+
+    useEffect(() => {
+      if ((isFirstInput.current===false)&&(commerces.length >0) &&(localidades.length===0)){
+      // todas las localidades únicas de los comercios
+      const localidadesUnicas = [...new Set(commerces.map(comercio => comercio.localidad))];
+      setLocalidades(localidadesUnicas);  
+      } 
+    }, [commerces]);   
+
+
+
+    useEffect(() => {
+      if ((localidadSeleccionada !== null) &&(rubros.length===0)) {
+        const rubrosEnLocalidad = commerces
+          .filter(comercio => comercio.localidad === localidadSeleccionada)
+          .map(comercio => comercio.rubro);
+        const rubrosUnicos = [...new Set(rubrosEnLocalidad)];
+        setRubros(rubrosUnicos);
+      }
+    }, [localidadSeleccionada, commerces]);     
+
+//#endregion
   return (
     <div className="page">
       <header className="   w-full">
@@ -131,25 +171,22 @@ function Commerce() {
             onSubmit={handleSubmit}
             id="formlist"
           >
-
-            <select
-              name="localidad"
-              id="localidad"
-              onChange={handleSelect}
-              value={select}
-              className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-auto p-2.5 dark:bg-gray-300  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option value="">Localidad</option>
-              <optgroup label="Buenos Aires">
-                <option value="Bahia Blanca">Bahia Blanca</option>
-                <option value="Punta Alta">Punta Alta</option>
-                <option value="Mar Del Plata">Mar Del Plata</option>
-                <option value="Monte Hermoso">Monte Hermoso</option>
-              </optgroup>
-              <optgroup label="Cordoba">
-                <option value="Villa Maria">Villa Maria</option>
-              </optgroup>
-            </select>
+   
+                  {localidades.length > 0 && (
+                    <select 
+                    name="localidad"
+                    id="localidad"
+                    className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-auto p-2.5 dark:bg-gray-300  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={select}
+                    
+                    onChange={e =>{ setLocalidadSeleccionada(e.target.value);handleSelect(e)}}>
+                      {localidades.map(localidad => <option key={localidad} value={localidad}>{localidad}</option>) }
+                      
+                      <option value="">Localidad</option>
+                    </select>
+                  )}
+                 
+                
             {/*input+dropdown rubro */}
             <div className=" relative w-auto pt-3">
               <div className="flex">
@@ -157,15 +194,14 @@ function Commerce() {
                   id="rubro"
                   name="rubro"
                   onChange={handleSelectRubro}
+
+
                   value={selectR}
                   className=" z-0  inline-flex items-center  text-sm font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800 "
                 >
+                   {rubros.map(rubro => <option value={rubro}>{rubro}</option>)}
                   <option value="">Rubro</option>
-                  <option value="Indumentaria">Indumentaria</option>
-                  <option value="Deportes">Deportes</option>
-                  <option value="Comida">Comida</option>
-                  <option value="Regaleria">Regaleria</option>
-                  <option value="Electrodomesticos">Electrodomesticos</option>
+                  
                 </select>
                 <div className="relative w-full">
                   <input

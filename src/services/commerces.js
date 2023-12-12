@@ -9,7 +9,8 @@ export const searchCommerces = async ({ search, select, selectR }) => {
         const arr = Object.values(data);
  */
     if (search === '' && (select === undefined || select === '')&&(selectR === undefined || selectR === '') ) {
-      return arr.map(commerce => ({
+      return arr 
+      .map(commerce => ({
         id: commerce.ID,
         nomComercio: commerce.NomComercio,
         localidad: commerce.Localidad,
@@ -21,7 +22,7 @@ export const searchCommerces = async ({ search, select, selectR }) => {
         longitud: commerce.Longitud,
         telefono:commerce.NroTel,
         prefijo:commerce.Prefijo
-      }));
+      })); 
     }
 
     let filteredCommerces = arr;
@@ -32,7 +33,7 @@ export const searchCommerces = async ({ search, select, selectR }) => {
       );
     }
 
-    if (select.current  !== "") {
+    if (select.current  !== ""  ) {
       filteredCommerces = filteredCommerces.filter(item =>
         item.Localidad.toLowerCase().includes(select.toLowerCase())
       );
