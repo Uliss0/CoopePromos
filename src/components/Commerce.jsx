@@ -45,6 +45,7 @@ function Commerce() {
   let refselect = useRef("");
   let refselectR = useRef("");
 
+
   const debouncedGetCommerces = useCallback(
     debounce((search) => {
       getCommerces({
@@ -74,8 +75,10 @@ function Commerce() {
     getCommerces({
       search: search,
       select: newSelect,
-      selectR: refselectR.current,
+      selectR: "",
     });
+    
+
 
     //control muestra el mapa por localidad
     const localidadCentral = searchLocalidades({ select: newSelect });
@@ -85,6 +88,8 @@ function Commerce() {
       zoom: 15,
     };
     setUbicacion(ubicacion);
+
+ 
   };
 
   // ordenar / checkbox
@@ -127,10 +132,10 @@ function Commerce() {
   const [localidades, setLocalidades] = useState([]);
   const [rubros, setRubros] = useState([]);
   const [localidadSeleccionada, setLocalidadSeleccionada] = useState(null);
-
+  const [rubrosFiltrados, setRubrosFiltrados] = useState([]);
   const isFirstInput = useRef(true)
-  
-
+  const commercesRef=useRef([])
+  //Trae todos los datos
   useEffect(() => {
     
     if (isFirstInput.current) {
@@ -140,26 +145,42 @@ function Commerce() {
       return
     } },[])
     
-
+    //Carga las localidades que tengan comercios
     useEffect(() => {
       if ((isFirstInput.current===false)&&(commerces.length >0) &&(localidades.length===0)){
       // todas las localidades únicas de los comercios
       const localidadesUnicas = [...new Set(commerces.map(comercio => comercio.localidad))];
       setLocalidades(localidadesUnicas);  
+      commercesRef.current=commerces
       } 
     }, [commerces]);   
 
-
-
+    
+    //Carga los rubros de cada localidad
+    /*
     useEffect(() => {
-      if ((localidadSeleccionada !== null) &&(rubros.length===0)) {
+      if ((localidadSeleccionada !== null)|| (localidadSeleccionada !== localidadSeleccionadaRef.current)) {
+        console.log("localidad Seleccionada: ",localidadSeleccionada, "localidad ref:", localidadSeleccionadaRef.current)
         const rubrosEnLocalidad = commerces
           .filter(comercio => comercio.localidad === localidadSeleccionada)
           .map(comercio => comercio.rubro);
         const rubrosUnicos = [...new Set(rubrosEnLocalidad)];
         setRubros(rubrosUnicos);
+        localidadSeleccionadaRef.current=localidadSeleccionada
       }
-    }, [localidadSeleccionada, commerces]);     
+    }, [localidadSeleccionada,commerces]);     */
+
+    useEffect(() => {
+      if (localidadSeleccionada !== null) {
+        const rubrosEnLocalidad = commercesRef.current
+          .filter(comercio => comercio.localidad === localidadSeleccionada)
+          .map(comercio => comercio.rubro);
+        const rubrosUnicos = [...new Set(rubrosEnLocalidad)];
+        setRubros(rubrosUnicos); // Aquí se guardan todos los rubros
+        setRubrosFiltrados(rubrosUnicos); // Y aquí los rubros filtrados
+        
+      }
+    }, [localidadSeleccionada, commerces]);
 
 //#endregion
   return (
@@ -176,13 +197,13 @@ function Commerce() {
                     <select 
                     name="localidad"
                     id="localidad"
-                    className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-auto p-2.5 dark:bg-gray-300  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border  border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-auto p-2.5 dark:bg-gray-300  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     value={select}
                     
                     onChange={e =>{ setLocalidadSeleccionada(e.target.value);handleSelect(e)}}>
+                      <option value="">Localidad</option>
                       {localidades.map(localidad => <option key={localidad} value={localidad}>{localidad}</option>) }
                       
-                      <option value="">Localidad</option>
                     </select>
                   )}
                  
@@ -190,6 +211,7 @@ function Commerce() {
             {/*input+dropdown rubro */}
             <div className=" relative w-auto pt-3">
               <div className="flex">
+              
                 <select
                   id="rubro"
                   name="rubro"
@@ -197,12 +219,13 @@ function Commerce() {
 
 
                   value={selectR}
-                  className=" z-0  inline-flex items-center  text-sm font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800 "
+                  className=" z-0 min-w-auto max-w-auto text-sm inline-flex items-center  max-w-auto font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800 "
                 >
-                   {rubros.map(rubro => <option value={rubro}>{rubro}</option>)}
-                  <option value="">Rubro</option>
+                  <option value="" className="">Rubro</option>
+                   {rubrosFiltrados.map(rubro =><option key={rubro} value={rubro}className="">{rubro}</option>)}
                   
                 </select>
+                
                 <div className="relative w-full">
                   <input
                     type="search"

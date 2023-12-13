@@ -49,7 +49,7 @@ const Maps = () => {
     }
     console.log(map)
     
-  }, [map, ubicacion]);
+  }, [map, ubicacion]);map id anterior bf51a910020fa25a
  */
 
   
@@ -62,10 +62,10 @@ const Maps = () => {
   }
 
   return (
-    <APIProvider apiKey={API_KEY}>
+    <APIProvider apiKey={API_KEY}>  
       <div style={{ height: "55vh", width: "100%" }}  id="map">
         <Map
-          mapId={"bf51a910020fa25a"}
+          mapId={"cfb9cbd5c58ced25"}
           zoom={14}
           center={{lat:ubicacion.lat ,lng:ubicacion.lng }}//|| { lat: 43.64, lng: -79.41 }}
         >
@@ -155,12 +155,12 @@ const Markers = ({ points }) => {
               ref={marker => setMarkerRef(marker, point.key)}
               onClick={() => handleMarkerClick(point)}
             >
-              <span className="tree" ><img  src={descuento}  className=" max-w-[28px] min-h-[28px] max-h-[30px]" alt="logo"/></span>
+              <span className="tree" ><img  src={descuento}  className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo"/></span>
               {openMarkers[point.key] && (
                 <InfoWindow position={point} 
                 onCloseClick={() => handleMarkerClick(point)}>
                  
-                  <p>Nombre:<strong>{point.nombreComercio}</strong></p>
+                  <p className="text-lg"><strong>{point.nombreComercio}</strong></p>
                   <p>Direccion: <strong>{point.direccion}</strong></p>
                   <p>Telefono:<strong>{point.prefijo}-{point.telefono}</strong></p>
                   <p>Descuento:<strong>%{point.descuento}</strong></p>

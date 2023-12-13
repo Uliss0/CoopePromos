@@ -18,6 +18,15 @@
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
+        },
+        {
+            "ID":3,
+            "Localidad": "Allen",
+            "Latitud": -38.8754402,
+            "Longitud": -62.0713637,
+            "Provincia": "Buenos Aires",
+            "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
+            "Link":"https://google.com.ar"
         }
         
     ]
