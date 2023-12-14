@@ -1,4 +1,4 @@
-import footerimg from '../assets/Footerimg.svg'
+import footerimg from '../assets/Footerimgs.svg'
 //import { useState } from 'react';   
 
 

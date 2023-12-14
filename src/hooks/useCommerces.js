@@ -1,7 +1,7 @@
 import { useRef, useState, useMemo, useCallback } from 'react'
 import { searchCommerces } from '../services/commerces.js'
 
-export function useCommerces ({ search,select,selectR, sort }) {
+export function useCommerces ({ search,select,selectR, sort,filtrar10,filtrar15,filtrar20 }) {
   
   const [commerces, setCommerces] = useState([])
   const [loading, setLoading] = useState(false)
@@ -12,7 +12,7 @@ export function useCommerces ({ search,select,selectR, sort }) {
   const previousLocal = useRef(select)
   const previousLocalR = useRef(selectR)
 
-  const getCommerces = useCallback(async ({ search, select,selectR }) => {
+  const getCommerces = useCallback(async ({ search, select,selectR,filtrar10,filtrar15,filtrar20 }) => {
     /////console.log("search usecommerces2", search, "select:", select)
     //if ((search === previousSearch.current) && (select === previousLocal.current) && (selectR === previousLocalR.current)) return
     // search es ''
@@ -27,7 +27,7 @@ export function useCommerces ({ search,select,selectR, sort }) {
       previousLocalR.current = selectR
 
       
-      const newCommerces = await searchCommerces({ search, select, selectR })
+      const newCommerces = await searchCommerces({ search, select, selectR,filtrar10,filtrar15,filtrar20 })
      // console.log("newcomerces, hook:",newCommerces)
      
       setCommerces(newCommerces)

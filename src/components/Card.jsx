@@ -36,7 +36,7 @@ export function Card({ commerce, onClose }){
                                             <h2 className="text-center text-lg mt-2">{commerce.rubro}</h2>   
                                             
                                             
-                                            <p className="text-sm text-left mx-4 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem, est architecto dolorum accusamus culpa incidunt, porro vitae aliquam nulla voluptatibus! Ratione natus, quam obcaecati ducimus nemo necessitatibus numquam provident.</p>
+                                            <p className="text-sm text-left mx-4 mt-4"> ////// En este espacio el comercio podria poner una descripcion de su negocio.//////</p>
                                             <br></br>
                                             <div className='flex justify-around text-sm'><MdLocationPin/><p>{commerce.direccion} </p> |<FaPhone/><p>{commerce.prefijo}-{commerce.telefono} </p></div>
                                             <p>{commerce.localidad}</p>

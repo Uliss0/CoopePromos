@@ -13,6 +13,8 @@ function ListOfCommerces ({ commerces }) {
   const closeDetails = () => {
     setSelectedCommerce(null);
   };
+  
+  if(commerces[0].id===undefined)return
 
   return (
     <div className=''>
