@@ -8,6 +8,7 @@ import Maps from './components/Maps';
 import { CheckboxProvider } from './context/CheckContext';
 import { UbicacionProvider } from './context/UbicacionContext';
 //import Dropdown from './components/Dropdown';
+import { CommerceProvider } from './context/CommercesContext';
 
 
 
@@ -19,13 +20,14 @@ function App() {
     
      <Header/>
      <Slider/>
+     <CommerceProvider>
      <UbicacionProvider>
      <CheckboxProvider>
      <Maps/>
      <Commerce/>
      </CheckboxProvider>
      </UbicacionProvider>
-     
+     </CommerceProvider>
     </div>
   );
 }

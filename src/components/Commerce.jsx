@@ -7,6 +7,7 @@ import { Commerces } from "./Commerces.jsx";
 import Footer from "./Footer.jsx";
 import debounce from "just-debounce-it";
 import { UbicacionContext } from "../context/UbicacionContext";
+import { CommercesContext } from '../context/CommercesContext';
 import { searchLocalidades } from "../services/localities.js";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
@@ -29,6 +30,7 @@ function useSelectR() {
 
 function Commerce() {
   const { setUbicacion } = useContext(UbicacionContext);
+  const { setComercios } = useContext(CommercesContext);
   const [sort, setSort] = useState(false);
   const { search, updateSearch, error } = useSearch();
   const { select, updateSelect } = useSelect();
@@ -49,7 +51,8 @@ function Commerce() {
 
   let refselect = useRef("");
   let refselectR = useRef("");
- 
+  
+  
 
   const debouncedGetCommerces = useCallback(
     debounce((search) => {
@@ -63,6 +66,7 @@ function Commerce() {
       });
     }, 300),
     [getCommerces]
+    
   );
 
   //Manejador del submit del formulario
@@ -177,8 +181,16 @@ function Commerce() {
       ];
       setLocalidades(localidadesUnicas);
       commercesRef.current = commerces;
+
+      
     }
   }, [commerces]);
+
+  useEffect(() => {
+    if((commerces.length>0)&&(commerces.current !== commerces)){
+      setComercios(commerces);
+    }
+  },[setComercios,commerces]);
 
   //Carga los rubros de cada localidad
 
@@ -252,7 +264,9 @@ function Commerce() {
      return !existeValor
   };
 //#endregion
-  return (
+
+
+return (
     <div className="page">
       <header className="   w-full">
         <div className="  p-6 xs:m-8 xxs:m-2   rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.29),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
@@ -465,6 +479,7 @@ function Commerce() {
         {loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />}
 
         <Footer select={refselect.current} />
+        
       </main>
     </div>
   );

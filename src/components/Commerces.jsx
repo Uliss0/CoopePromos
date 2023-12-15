@@ -14,7 +14,7 @@ function ListOfCommerces ({ commerces }) {
     setSelectedCommerce(null);
   };
   
-  if(commerces[0].id===undefined)return
+  if(commerces[0].provincia===undefined)return
 
   return (
     <div className=''>

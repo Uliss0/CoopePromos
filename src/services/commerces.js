@@ -14,15 +14,15 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       (selectR === undefined || selectR === "")
     ) {
       return arr.map((commerce) => ({
-       // id: commerce.ID, //comentar esta linea para que no se vean todos
+        id: commerce.ID, //comentar esta linea para que no se vean todos
         nomComercio: commerce.NomComercio,
         localidad: commerce.Localidad,
         rubro: commerce.Rubro,
         direccion: commerce.Direccion,
         dto: commerce.Dto,
-        provincia: commerce.Provincia,
-        latitud: commerce.Latitud,
-        longitud: commerce.Longitud,
+        
+        lat: commerce.Latitud,
+        lng: commerce.Longitud,
         telefono: commerce.NroTel,
         prefijo: commerce.Prefijo,
       }));
@@ -66,8 +66,8 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       direccion: commerce.Direccion,
       dto: commerce.Dto,
       provincia: commerce.Provincia,
-      latitud: commerce.Latitud,
-      longitud: commerce.Longitud,
+      lat: commerce.Latitud,
+      lng: commerce.Longitud,
       telefono: commerce.NroTel,
       prefijo: commerce.Prefijo,
     }));

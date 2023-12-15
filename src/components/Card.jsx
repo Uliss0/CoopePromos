@@ -12,7 +12,7 @@ export function Card({ commerce, onClose }){
       };
 
       const handleClick = () => {
-       const ubicacion={lat:commerce.latitud, lng:commerce.longitud,zoom:15}
+       const ubicacion={lat:commerce.lat, lng:commerce.lng,zoom:17}
 
         setUbicacion(ubicacion);
         handleClose();
