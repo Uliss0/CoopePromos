@@ -1,6 +1,6 @@
 import "../App.css";
 import "./Commerce.css";
-import { useState, useCallback, useRef, useContext, useEffect } from "react";
+import { useState, useCallback, useRef, useContext, useEffect, useMemo } from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
 import { Commerces } from "./Commerces.jsx";
@@ -52,10 +52,13 @@ function Commerce() {
   let refselect = useRef("");
   let refselectR = useRef("");
   
-  
+  const commercesMemo = useMemo(() => ({
+    commerces
+  }), [commerces]);
 
   const debouncedGetCommerces = useCallback(
     debounce((search) => {
+      
       getCommerces({
         search: search,
         select: refselect.current,

@@ -13,6 +13,7 @@ import logo10 from '../assets/10c.png'
 import { useCheckbox } from '../context/CheckContext';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { CommercesContext } from '../context/CommercesContext';
+import { hasPointerEvents } from "@testing-library/user-event/dist/utils"
 
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
@@ -24,7 +25,7 @@ const Maps = () => {
   const { comercios } = useContext(CommercesContext);
 
 
-console.log("comercios",comercios)
+//console.log("comercios",comercios)
 
   /* useEffect(() => {
     
@@ -101,20 +102,32 @@ const Markers = React.memo(({ points }) => {
 
   // Update markers
   useEffect(() => {
+    
     clusterer.current?.clearMarkers()
     clusterer.current?.addMarkers(Object.values(markers))
+    
+    console.log("markers: ", markers)
   }, [markers])
 
-  const setMarkerRef = (marker, id) => {
-    if (marker && markers[id]) return
-    if (!marker && !markers[id]) return
-
+  const setMarkerRef = (marker, key) => {
+    if (marker && markers[key]) return
+    if (!marker && !markers[key]) return
+    
+    
+    if(marker===undefined)return
+    if((markers[key]==null) ){
+      
+      return }
+    
     setMarkers(prev => {
       if (marker) {
-        return { ...prev, [id]: marker }
+        
+        return { ...prev, [key]: marker }
       } else {
         const newMarkers = { ...prev }
-        delete newMarkers[id]
+        delete newMarkers[key]
+        //console.log("markers; ", newMarkers)
+
         return newMarkers
       }
     })
@@ -123,7 +136,7 @@ const Markers = React.memo(({ points }) => {
   const handleMarkerClick = (point) => {
     setOpenMarkers(prev => ({
       ...prev,
-      [point.id]: !prev[point.id] // toggle the state for the clicked marker
+      [point.key]: !prev[point.key] // toggle the state for the clicked marker
     }));
   };
 
@@ -139,6 +152,8 @@ const Markers = React.memo(({ points }) => {
   let descuento=null;
 
   if(points[0].provincia===undefined)return
+
+  
   return (
     <>
       
@@ -152,15 +167,15 @@ const Markers = React.memo(({ points }) => {
       <div >
           {points.map(point => (
             descuento=point.dto===15?logo15:logo10,
-            <div key={point.id} >
+            <div key={point.key} >
             <AdvancedMarker
               position={point}
-              key={point.id}
-              ref={marker => setMarkerRef(marker, point.id)}
+              key={point.key}
+              ref={marker => setMarkerRef(marker, point.key)}
               onClick={() => handleMarkerClick(point)}
             >
               <span className="tree" ><img  src={descuento}  className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo"/></span>
-              {openMarkers[point.id] && (
+              {openMarkers[point.key] && (
                 <InfoWindow position={point} 
                 onCloseClick={() => handleMarkerClick(point)}>
                  
@@ -182,8 +197,13 @@ const Markers = React.memo(({ points }) => {
       
            
     </>
-  )
-})
+  );
+},
+(prevProps, nextProps) => {
+  // Función de comparación de props
+  return prevProps.points === nextProps.points;
+}
+);
 
 export default Maps
 

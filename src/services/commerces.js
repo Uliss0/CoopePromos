@@ -14,7 +14,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       (selectR === undefined || selectR === "")
     ) {
       return arr.map((commerce) => ({
-        id: commerce.ID, //comentar esta linea para que no se vean todos
+        id: commerce.ID,
         nomComercio: commerce.NomComercio,
         localidad: commerce.Localidad,
         rubro: commerce.Rubro,
@@ -25,16 +25,24 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
         lng: commerce.Longitud,
         telefono: commerce.NroTel,
         prefijo: commerce.Prefijo,
+        key: JSON.stringify({
+          id: commerce.ID,
+          nomComercio: commerce.NomComercio,
+          localidad: commerce.Localidad,
+          rubro: commerce.Rubro,
+          direccion: commerce.Direccion,
+          dto: commerce.Dto,
+          lat: commerce.Latitud,
+          lng: commerce.Longitud,
+          telefono: commerce.NroTel,
+          prefijo: commerce.Prefijo
+      })
       }));
     }
 
     let filteredCommerces = arr;
-
-    if (search !== "") {
-      filteredCommerces = filteredCommerces.filter((item) =>
-        item.NomComercio.toLowerCase().includes(search.toLowerCase())
-      );
-    }
+    
+   
 
     if (select.current !== "") {
       filteredCommerces = filteredCommerces.filter((item) =>
@@ -57,7 +65,15 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
     if (!filtrar20) {
       filteredCommerces = filteredCommerces.filter((item) => item.Dto !== 20);
     }
-   
+    
+    if (search !== "") {
+      filteredCommerces = filteredCommerces.filter((item) =>
+        item.NomComercio.toLowerCase().includes(search.toLowerCase()
+        )
+      );
+      
+    }
+
     return filteredCommerces.map((commerce) => ({
       id: commerce.ID,
       nomComercio: commerce.NomComercio,
@@ -70,6 +86,18 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       lng: commerce.Longitud,
       telefono: commerce.NroTel,
       prefijo: commerce.Prefijo,
+      key: JSON.stringify({
+        id: commerce.ID,
+        nomComercio: commerce.NomComercio,
+        localidad: commerce.Localidad,
+        rubro: commerce.Rubro,
+        direccion: commerce.Direccion,
+        dto: commerce.Dto,
+        lat: commerce.Latitud,
+        lng: commerce.Longitud,
+        telefono: commerce.NroTel,
+        prefijo: commerce.Prefijo
+    })
     }));
     
   } catch (e) {
