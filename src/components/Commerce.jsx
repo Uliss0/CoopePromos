@@ -1,6 +1,6 @@
 import "../App.css";
 import "./Commerce.css";
-import { useState, useCallback, useRef, useContext, useEffect, useMemo } from "react";
+import { useState, useCallback, useRef, useContext, useEffect } from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
 import { Commerces } from "./Commerces.jsx";
@@ -52,9 +52,7 @@ function Commerce() {
   let refselect = useRef("");
   let refselectR = useRef("");
   
-  const commercesMemo = useMemo(() => ({
-    commerces
-  }), [commerces]);
+
 
   const debouncedGetCommerces = useCallback(
     debounce((search) => {
@@ -260,9 +258,13 @@ function Commerce() {
       filtrar20: updatedFiltrar20,
     });
   };
-
+  
+  let previo=useRef(0);
   const enableFilter20=()=>{
     let existeValor = commerces.some((item) => item.dto ===20);
+    if ((previo.current!==0) || (existeValor)){
+      previo.current=1
+      return false}
    
      return !existeValor
   };
@@ -291,6 +293,7 @@ return (
               >
                 <option value="">Localidad</option>
                 {localidades.map((localidad) => (
+                 
                   <option key={localidad} value={localidad}>
                     {localidad}
                   </option>

@@ -13,8 +13,8 @@
         {
             "ID":1,
             "Localidad": "25 DE MAYO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.432075, 
+            "Longitud": -60.169008,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -22,8 +22,8 @@
         {
             "ID":2,
             "Localidad": "9 DE JULIO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.4457612,
+            "Longitud": -60.8856132,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -31,8 +31,8 @@
         {
             "ID":3,
             "Localidad": "ALLEN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.9765932,
+            "Longitud": -67.8300052,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -40,8 +40,8 @@
         {
             "ID":4,
             "Localidad": "ALUMINE",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.2361557,
+            "Longitud": -70.9201961,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -49,8 +49,8 @@
         {
             "ID":5,
             "Localidad": "AÑELO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.352832,
+            "Longitud": -68.787236,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -58,8 +58,8 @@
         {
             "ID":6,
             "Localidad": "ANDACOLLO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.180283, 
+            "Longitud": -70.668301,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -67,8 +67,8 @@
         {
             "ID":7,
             "Localidad": "AZUL",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.778609,
+            "Longitud":  -59.858059,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -76,8 +76,8 @@
         {
             "ID":8,
             "Localidad": "BATAN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.007943,
+            "Longitud":  -57.712862,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -85,8 +85,8 @@
         {
             "ID":9,
             "Localidad": "BENITO JUÁREZ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.674725, 
+            "Longitud": -59.804413,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -94,8 +94,8 @@
         {
             "ID":10,
             "Localidad": "BOLÍVAR",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.232995, 
+            "Longitud": -61.118558,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -103,8 +103,8 @@
         {
             "ID":11,
             "Localidad": "CARHUÉ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.179748, 
+            "Longitud": -62.760127,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -112,8 +112,8 @@
         {
             "ID":12,
             "Localidad": "CARILÓ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.166899, 
+            "Longitud":-56.905161,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -121,8 +121,8 @@
         {
             "ID":13,
             "Localidad": "CARMEN DE PATAGONES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -40.796713, 
+            "Longitud": -62.980998,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -130,8 +130,8 @@
         {
             "ID":14,
             "Localidad": "CASBAS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.758806, 
+            "Longitud": -62.501931,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -139,8 +139,8 @@
         {
             "ID":15,
             "Localidad": "CATRIEL",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.879791, 
+            "Longitud": -67.791964,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -148,8 +148,8 @@
         {
             "ID":16,
             "Localidad": "CENTENARIO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.826683, 
+            "Longitud": -68.144439,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -157,8 +157,8 @@
         {
             "ID":17,
             "Localidad": "CHOELE CHOEL",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.289822, 
+            "Longitud": -65.658736,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -166,8 +166,8 @@
         {
             "ID":18,
             "Localidad": "CHOS MALAL",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.379376, 
+            "Longitud": -70.270185,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -175,8 +175,8 @@
         {
             "ID":19,
             "Localidad": "CINCO SALTOS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.831979, 
+            "Longitud": -68.057005,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -184,8 +184,8 @@
         {
             "ID":20,
             "Localidad": "CIPOLLETTI",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.935121, 
+            "Longitud": -67.988119,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -193,8 +193,8 @@
         {
             "ID":21,
             "Localidad": "COMODORO RIVADAVIA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -45.862175, 
+            "Longitud": -67.481131,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -202,8 +202,8 @@
         {
             "ID":22,
             "Localidad": "CORONEL DORREGO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.720235, 
+            "Longitud": -61.287486,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -211,8 +211,8 @@
         {
             "ID":23,
             "Localidad": "CORONEL PRINGLES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.983758, 
+            "Longitud": -61.351789,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -220,8 +220,8 @@
         {
             "ID":24,
             "Localidad": "CORONEL SUÁREZ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.457836, 
+            "Longitud": -61.932200,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -229,8 +229,8 @@
         {
             "ID":25,
             "Localidad": "CUTRAL CO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.938733, 
+            "Longitud": -69.230484,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -238,8 +238,8 @@
         {
             "ID":26,
             "Localidad": "GENERAL ACHA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.375844, 
+            "Longitud": -64.603784,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -247,8 +247,8 @@
         {
             "ID":27,
             "Localidad": "GENERAL FERNÁNDEZ ORO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.952878, 
+            "Longitud": -67.928508,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -256,8 +256,8 @@
         {
             "ID":28,
             "Localidad": "GENERAL DANIEL CERRI",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.714932, 
+            "Longitud": -62.396410,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -265,8 +265,8 @@
         {
             "ID":29,
             "Localidad": "GENERAL LA MADRID",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.247527, 
+            "Longitud": -61.262132,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -274,8 +274,8 @@
         {
             "ID":30,
             "Localidad": "GENERAL PICO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.660446, 
+            "Longitud": -63.754889,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -283,8 +283,8 @@
         {
             "ID":31,
             "Localidad": "GENERAL ROCA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.025699, 
+            "Longitud": -67.585211,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -292,8 +292,8 @@
         {
             "ID":32,
             "Localidad": "GENERAL VILLEGAS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.033754, 
+            "Longitud": -63.012720,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -301,8 +301,8 @@
         {
             "ID":33,
             "Localidad": "GUATRACHÉ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.669342, 
+            "Longitud": -63.539540,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -310,8 +310,8 @@
         {
             "ID":34,
             "Localidad": "HENDERSON",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.300970, 
+            "Longitud": -61.716759,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -319,8 +319,8 @@
         {
             "ID":35,
             "Localidad": "INGENIERO WHITE",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.781889, 
+            "Longitud": -62.267626,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -328,8 +328,8 @@
         {
             "ID":36,
             "Localidad": "HUANGUELÉN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.062332,
+            "Longitud": -61.938937,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -337,8 +337,8 @@
         {
             "ID":37,
             "Localidad": "JUNÍN DE LOS ANDES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.950781, 
+            "Longitud": -71.073626,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -346,8 +346,8 @@
         {
             "ID":38,
             "Localidad": "LAMARQUE",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.424169, 
+            "Longitud": -65.700453,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -355,8 +355,8 @@
         {
             "ID":39,
             "Localidad": "LAPRIDA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.545078, 
+            "Longitud": -60.798865,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -364,8 +364,8 @@
         {
             "ID":40,
             "Localidad": "LAS LAJAS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.525773, 
+            "Longitud": -70.364405,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -373,8 +373,8 @@
         {
             "ID":41,
             "Localidad": "LOBERÍA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.163485, 
+            "Longitud": -58.780136,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -382,8 +382,8 @@
         {
             "ID":42,
             "Localidad": "LONCOPUÉ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.070930, 
+            "Longitud": -70.614230,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -391,8 +391,8 @@
         {
             "ID":43,
             "Localidad": "LUIS BELTRÁN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.313521, 
+            "Longitud": -65.759946,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -400,8 +400,8 @@
         {
             "ID":44,
             "Localidad": "MADARIAGA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.001959, 
+            "Longitud": -57.133692,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -409,8 +409,8 @@
         {
             "ID":45,
             "Localidad": "MAR DEL PLATA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.013294, 
+            "Longitud": -57.551223,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -418,8 +418,8 @@
         {
             "ID":46,
             "Localidad": "MONTE HERMOSO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.985349, 
+            "Longitud": -61.288747,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -427,8 +427,8 @@
         {
             "ID":47,
             "Localidad": "NECOCHEA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.555677, 
+            "Longitud": -58.737355,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -436,8 +436,8 @@
         {
             "ID":48,
             "Localidad": "NEUQUÉN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.953035, 
+            "Longitud": -68.061321,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -445,8 +445,8 @@
         {
             "ID":49,
             "Localidad": "OLAVARRÍA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.894198, 
+            "Longitud": -60.318264,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -454,8 +454,8 @@
         {
             "ID":50,
             "Localidad": "OSTENDE",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.127706, 
+            "Longitud": -56.884273,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -463,8 +463,8 @@
         {
             "ID":51,
             "Localidad": "PEDRO LURO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.502441, 
+            "Longitud": -62.685989,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -472,8 +472,8 @@
         {
             "ID":52,
             "Localidad": "PEHUAJÓ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.811441, 
+            "Longitud": -61.898001,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -481,8 +481,8 @@
         {
             "ID":53,
             "Localidad": "PIGÜÉ",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.603732, 
+            "Longitud": -62.400442,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -490,8 +490,8 @@
         {
             "ID":54,
             "Localidad": "PINAMAR",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.113856, 
+            "Longitud": -56.863120,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -499,8 +499,8 @@
         {
             "ID":55,
             "Localidad": "PLOTTIER",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.949669, 
+            "Longitud": -68.229451,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -517,8 +517,8 @@
         {
             "ID":57,
             "Localidad": "RINCÓN DE LOS SAUCES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.394655, 
+            "Longitud": -68.927148,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -526,8 +526,8 @@
         {
             "ID":58,
             "Localidad": "RÍO COLORADO",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.993482, 
+            "Longitud": -64.095903,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -535,8 +535,8 @@
         {
             "ID":59,
             "Localidad": "SAN MARTÍN DE LOS ANDES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -40.156373, 
+            "Longitud": -71.352084,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -544,8 +544,8 @@
         {
             "ID":60,
             "Localidad": "SAN NICOLÁS DE LOS ARROYOS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -33.330659, 
+            "Longitud": -60.220886,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -553,8 +553,8 @@
         {
             "ID":61,
             "Localidad": "SAN PATRICIO DEL CHAÑAR",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.626435, 
+            "Longitud": -68.299151,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -562,8 +562,8 @@
         {
             "ID":62,
             "Localidad": "SANTA MARÍA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.560604,
+            "Longitud": -61.877047,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -571,8 +571,8 @@
         {
             "ID":63,
             "Localidad": "SANTA ROSA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -36.620770, 
+            "Longitud": -64.287814,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -580,8 +580,8 @@
         {
             "ID":64,
             "Localidad": "SIERRA DE LA VENTANA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.134453, 
+            "Longitud": -61.796647,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -589,8 +589,8 @@
         {
             "ID":65,
             "Localidad": "SUNCHALES",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -30.944801, 
+            "Longitud": -61.559495,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -598,8 +598,8 @@
         {
             "ID":66,
             "Localidad": "TORNQUIST",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.104106, 
+            "Longitud": -62.223001,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -607,8 +607,8 @@
         {
             "ID":67,
             "Localidad": "TRENQUE LAUQUEN",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -35.975357, 
+            "Longitud": -62.731042,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -616,8 +616,8 @@
         {
             "ID":68,
             "Localidad": "TRES ARROYOS",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.378317, 
+            "Longitud": -60.275746,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -625,8 +625,8 @@
         {
             "ID":69,
             "Localidad": "VIEDMA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -40.811806,
+            "Longitud": -62.991484,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -634,8 +634,8 @@
         {
             "ID":70,
             "Localidad": "VILLA GESELL",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -37.260243, 
+            "Longitud": -56.975577,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -643,8 +643,8 @@
         {
             "ID":71,
             "Localidad": "VILLA REGINA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -39.099344, 
+            "Longitud": -67.085781,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"
@@ -652,8 +652,8 @@
         {
             "ID":72,
             "Localidad": "ZAPALA",
-            "Latitud": -38.8754402,
-            "Longitud": -62.0713637,
+            "Latitud": -38.905627, 
+            "Longitud": -70.065324,
             "Provincia": "Buenos Aires",
             "Img": "https://www.coopeplus.com.ar/Contenidos/Img/Slides/slide-centros-atencion.jpg",
             "Link":"https://google.com.ar"

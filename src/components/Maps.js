@@ -10,6 +10,7 @@ import { MarkerClusterer,SuperClusterAlgorithm } from "@googlemaps/markercluster
 
 import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
+import logo20 from '../assets/20c.png'
 import { useCheckbox } from '../context/CheckContext';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { CommercesContext } from '../context/CommercesContext';
@@ -106,7 +107,7 @@ const Markers = React.memo(({ points }) => {
     clusterer.current?.clearMarkers()
     clusterer.current?.addMarkers(Object.values(markers))
     
-    console.log("markers: ", markers)
+   
   }, [markers])
 
   const setMarkerRef = (marker, key) => {
@@ -149,53 +150,53 @@ const Markers = React.memo(({ points }) => {
       map.setZoom(ubicacion.zoom);
     }
   }, [map, ubicacion]);
-  let descuento=null;
+  let descuento = null;
 
-  if(points[0].provincia===undefined)return
-
+  if(points[0].provincia === undefined) return
   
   return (
     <>
-      
       {isChecked ? (
         <div>
           
         </div>
       ) : (
-
         <section id='Mapcomponent'>
-      <div >
-          {points.map(point => (
-            descuento=point.dto===15?logo15:logo10,
-            <div key={point.key} >
-            <AdvancedMarker
-              position={point}
-              key={point.key}
-              ref={marker => setMarkerRef(marker, point.key)}
-              onClick={() => handleMarkerClick(point)}
-            >
-              <span className="tree" ><img  src={descuento}  className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo"/></span>
-              {openMarkers[point.key] && (
-                <InfoWindow position={point} 
-                onCloseClick={() => handleMarkerClick(point)}>
-                 
-                  <p className="text-lg"><strong>{point.nomComercio}</strong></p>
-                  <p>Direccion: <strong>{point.direccion}</strong></p>
-                  <p>Telefono:<strong>{point.prefijo}-{point.telefono}</strong></p>
-                  <p>Descuento:<strong>{point.dto}%</strong></p>
-                </InfoWindow>
-              )}
-            </AdvancedMarker>
-            
-            </div>
-            
-          ))}
-
-        </div>
+          <div >
+            {points.map(point => {
+              if (point.dto === 15) {
+                descuento = logo15;
+              } else if (point.dto === 10) {
+                descuento = logo10;
+              } else if (point.dto === 20) {
+                descuento = logo20;
+              }
+              return (
+                <div key={point.key} >
+                  <AdvancedMarker
+                    position={point}
+                    key={point.key}
+                    ref={marker => setMarkerRef(marker, point.key)}
+                    onClick={() => handleMarkerClick(point)}
+                  >
+                    <span className="tree" ><img  src={descuento}  className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo"/></span>
+                    {openMarkers[point.key] && (
+                      <InfoWindow position={point} 
+                      onCloseClick={() => handleMarkerClick(point)}>
+                       
+                        <p className="text-lg"><strong>{point.nomComercio}</strong></p>
+                        <p>Direccion: <strong>{point.direccion}</strong></p>
+                        <p>Telefono:<strong>{point.prefijo}-{point.telefono}</strong></p>
+                        <p>Descuento:<strong>{point.dto}%</strong></p>
+                      </InfoWindow>
+                    )}
+                  </AdvancedMarker>
+                </div>
+              );
+            })}
+          </div>
         </section>
-       )}
-      
-           
+      )}
     </>
   );
 },
