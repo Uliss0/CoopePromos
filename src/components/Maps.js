@@ -14,7 +14,7 @@ import logo20 from '../assets/20c.png'
 import { useCheckbox } from '../context/CheckContext';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { CommercesContext } from '../context/CommercesContext';
-import { hasPointerEvents } from "@testing-library/user-event/dist/utils"
+
 
 const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 

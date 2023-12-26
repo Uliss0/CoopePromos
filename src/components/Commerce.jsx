@@ -309,7 +309,8 @@ return (
                   name="rubro"
                   onChange={handleSelectRubro}
                   value={selectR}
-                  className=" z-0 min-w-auto max-w-auto text-sm inline-flex items-center  max-w-auto font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800 "
+                  className=" z-0 min-w-auto max-w-auto text-sm inline-flex items-center  max-w-auto font-normal text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-300  dark:focus:ring-gray-700 dark:text-gray-800
+                   xxs:max-w-[150px] xxs:text-xs xs:max-w-[150px] xs:text-xs "
                 >
                   <option value="" className="">
                     Rubro
