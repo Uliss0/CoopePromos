@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { FaPhone } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
+import Icons from '../dataIcons';
 
 export function Card({ commerce, onClose }){
   const { setUbicacion } = useContext(UbicacionContext);
@@ -17,8 +18,9 @@ export function Card({ commerce, onClose }){
         setUbicacion(ubicacion);
         handleClose();
       };
-    
+    let ico=Icons.icon.find(icon => icon.name === commerce.rubro)
     return(
+      
         <div className="items-center grid place-content-center"  >
         <div className=" card flex items-center min-w-[400px] min-h-[400px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.18),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <div className=" ">
@@ -27,10 +29,11 @@ export function Card({ commerce, onClose }){
 
                 <img
                   className="  max-h-[200px] max-w-[200px] items-center inline-flex pt-2 p-b-0 "
-                  src={picture}
+                  src={
+                    commerce.img ? commerce.img : (ico) ?  ico.icon : picture}
                   alt="" />
               </div></div>
-                        <span className="bg-white rounded-tr-lg rounded-br-lg"><div className="justify-end flex mr-4"><button onClick={handleClose} > ✖ </button></div>  <div className="border-b-[2px] border-blue-500 font-bold mt-6"><div className="flex flex-row justify-center"><h1 className="text-2xl bold items-center">{commerce.nomComercio}</h1></div></div>
+                        <span className="bg-white rounded-tr-lg rounded-br-lg "><div className="justify-end flex mr-4"><button onClick={handleClose} > ✖ </button></div>  <div className="border-b-[2px] border-blue-500 font-bold mt-6"><div className="flex flex-row justify-center"><h1 className="text-2xl bold items-center">{commerce.nomComercio}</h1></div></div>
                           
                                             <div className="max-w-[350px] ">
                                                 

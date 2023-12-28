@@ -8,11 +8,12 @@
     "Direccion": "BELGRANO 207",
     "Prefijo": 291,
     "NroTel": 4500859,
-    "Dto": 15,
+    "Dto": 20,
     "Provincia": "BUENOS AIRES",
     "ImgComercio": "CooperativaObrera",
     "Latitud": -38.7177012,
-    "Longitud": -62.2612873
+    "Longitud": -62.2612873,
+    "Img":"https://aguamarinastore.com.ar/shop/wp-content/uploads/2023/10/promos2-300x300.jpg"
   },
   {
     "ID": 2,

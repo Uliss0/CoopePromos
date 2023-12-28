@@ -25,6 +25,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
         lng: commerce.Longitud,
         telefono: commerce.NroTel,
         prefijo: commerce.Prefijo,
+        img:commerce.Img,
         key: JSON.stringify({
           id: commerce.ID,
           nomComercio: commerce.NomComercio,
@@ -86,6 +87,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       lng: commerce.Longitud,
       telefono: commerce.NroTel,
       prefijo: commerce.Prefijo,
+      img:commerce.Img,
       key: JSON.stringify({
         id: commerce.ID,
         nomComercio: commerce.NomComercio,
