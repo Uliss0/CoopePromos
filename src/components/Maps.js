@@ -67,6 +67,7 @@ const Maps = () => {
 
   return (
     <APIProvider apiKey={API_KEY}>  
+        
       <div style={{ height: "55vh", width: "100%" }}  id="map">
         <Map
           mapId={"cfb9cbd5c58ced25"}

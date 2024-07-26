@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const CheckboxContext = createContext();
 
 export const CheckboxProvider = ({ children }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   const toggleCheckbox = () => {
     setIsChecked(prev => !prev);

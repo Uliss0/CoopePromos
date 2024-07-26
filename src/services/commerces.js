@@ -8,6 +8,8 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
         const data = await response.json();
         const arr = Object.values(data);
  */
+
+        
     if (
       search === "" &&
       (select === undefined || select === "") &&
@@ -44,7 +46,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
     let filteredCommerces = arr;
     
    
-
+    
     if (select.current !== "") {
       filteredCommerces = filteredCommerces.filter((item) =>
         item.Localidad.toLowerCase().includes(select.toLowerCase())
@@ -66,7 +68,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
     if (!filtrar20) {
       filteredCommerces = filteredCommerces.filter((item) => item.Dto !== 20);
     }
-    
+  
     if (search !== "") {
       filteredCommerces = filteredCommerces.filter((item) =>
         item.NomComercio.toLowerCase().includes(search.toLowerCase()
@@ -74,7 +76,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
       );
       
     }
-
+  
     return filteredCommerces.map((commerce) => ({
       id: commerce.ID,
       nomComercio: commerce.NomComercio,

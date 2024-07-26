@@ -1,24 +1,40 @@
 import picture from '../assets/picture.png'
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { UbicacionContext } from '../context/UbicacionContext';
 import { FaPhone } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
 import Icons from '../dataIcons';
+import CardButton from './buttons/CardButton'
 
-export function Card({ commerce, onClose }){
+
+
+export function Card({ commerce, onClose }) {
+
+
   const { setUbicacion } = useContext(UbicacionContext);
-    const handleClose = () => {
-        
-        onClose(null);
-      };
 
-      const handleClick = () => {
-       const ubicacion={lat:commerce.lat, lng:commerce.lng,zoom:18}
+  const handleClose = () => {
+    onClose(null);
+  };
 
-        setUbicacion(ubicacion);
-        handleClose();
-      };
-    let ico=Icons.icon.find(icon => icon.name === commerce.rubro)
+  const handleClick = () => {
+    const ubicacion = {lat: commerce.lat, lng: commerce.lng, zoom: 18};
+    setUbicacion(ubicacion);
+    const checkbox = document.querySelector("#switch3");
+    const mapComponent = document.getElementById("map");
+    if (!mapComponent) {
+      checkbox.click();
+
+    }
+
+    handleClose();
+  };
+
+
+
+  let ico = Icons.icon.find(icon => icon.name === commerce.rubro);
+  
+
     return(
       
         <div className="items-center grid place-content-center"  >
@@ -45,9 +61,12 @@ export function Card({ commerce, onClose }){
                                             <div className='flex justify-around text-sm'><MdLocationPin/><p>{commerce.direccion} </p> |<FaPhone/><p>{commerce.prefijo}-{commerce.telefono} </p></div>
                                             <p>{commerce.localidad}</p>
                                             
-                                           <a href='#Mapcomponent'> <button type='submit' onClick={handleClick}
-            className='  m-4 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg  px-5 py-2.5 text-center 
-            '>Mostrar en Mapa</button></a>
+                                            
+                                            <div>
+      <CardButton onClick={handleClick}  />
+      
+    </div>
+ 
             </div></span>
         </div>
         </div>

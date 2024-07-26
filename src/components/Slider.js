@@ -41,10 +41,10 @@ function Slider() {
   }; */
 
   return (
-    <div className='max-w-full h-[480px] w-full m-auto -z-0  relative group pt-[76px]'>
+    <div className='max-w-full h-screen w-full m-auto -z-0  relative group pt-[76px]'>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className='w-full h-full  bg-center bg-cover duration-500'
+        className='w-full h-full bg-center bg-cover duration-500'
       ></div>
       {/* Left Arrow */}
       <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
@@ -53,19 +53,8 @@ function Slider() {
       {/* Right Arrow */}
       <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactRight onClick={nextSlide} size={30} />
-      </div>{/*
-      <div className='flex top-4 justify-center py-2'>
-        {slides.map((slide, slideIndex) => (
-          <div
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className='text-2xl cursor-pointer'
-          >
-            <RxDotFilled />
-          </div>
-        ))}
-      </div>*/}
-      
+      </div>
+      <div id='mapPosition' style={{ height: "1px", width: "1px" }}></div>
     </div>
     
   );

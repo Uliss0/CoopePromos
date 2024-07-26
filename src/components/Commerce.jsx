@@ -126,6 +126,8 @@ function Commerce() {
     toggleCheckbox();
   };
 
+  
+
   //controlando dropdownRubro
   const handleSelectRubro = (event) => {
     const selectR = event.target.value;

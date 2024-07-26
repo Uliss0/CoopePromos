@@ -25,6 +25,7 @@ function ListOfCommerces ({ commerces }) {
     <ul className='commerces '>
       {
         commerces.map((commerce) => (
+          // eslint-disable-next-line
           ico=Icons.icon.find(icon => icon.name === commerce.rubro),
           <div className='auto-cols-auto ' key={commerce.id}>
               <li className='commerce gap-12 ' key={commerce.id} value={commerce.id} >
@@ -43,7 +44,7 @@ function ListOfCommerces ({ commerces }) {
                   alt="" />
               </div>
               <div className="p-6">
-              <h3 className='text-base pt-4'>{commerce.nomComercio}</h3>
+              <h3 className='text-base pt-4'><strong>{commerce.nomComercio}</strong></h3>
               <hr className="border-b border-blue-500"/>
                 
                 <p className="text-sm text-dark dark:text-dark">
@@ -53,7 +54,7 @@ function ListOfCommerces ({ commerces }) {
                   {commerce.direccion}
                 </p>
                 <p className="text-sm text-dark  dark:text-dark">
-                  <strong>{commerce.localidad}</strong>
+                  {commerce.localidad}
                 </p>
               </div>
               </div>
