@@ -1,6 +1,5 @@
 import picture from '../assets/picture.png'
-import React, { useContext} from 'react';
-import { UbicacionContext } from '../context/UbicacionContext';
+import { useUbicacion } from '../context/UbicacionContext';
 import { FaPhone } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
 import Icons from '../dataIcons';
@@ -10,16 +9,18 @@ import CardButton from './buttons/CardButton'
 
 export function Card({ commerce, onClose }) {
 
-
-  const { setUbicacion } = useContext(UbicacionContext);
-
+  const { setUbicacion, toggleInfoWindow } = useUbicacion();
+  /*
+  const { setUbicacion  } = useContext(UbicacionContext);
+  const {  toggleInfoWindow } = useUbicacion(); */
   const handleClose = () => {
     onClose(null);
   };
 
   const handleClick = () => {
-    const ubicacion = {lat: commerce.lat, lng: commerce.lng, zoom: 18};
+    const ubicacion = {lat: commerce.lat, lng: commerce.lng, zoom: 17};
     setUbicacion(ubicacion);
+    toggleInfoWindow(commerce.key);
     const checkbox = document.querySelector("#switch3");
     const mapComponent = document.getElementById("map");
     if (!mapComponent) {
@@ -30,10 +31,7 @@ export function Card({ commerce, onClose }) {
     handleClose();
   };
 
-
-
-  let ico = Icons.icon.find(icon => icon.name === commerce.rubro);
-  
+  let ico = Icons.icon.find(icon => icon.name === commerce.rubro);  
 
     return(
       

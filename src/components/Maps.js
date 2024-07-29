@@ -7,12 +7,11 @@ import {
   InfoWindow
 } from "@vis.gl/react-google-maps"
 import { MarkerClusterer,SuperClusterAlgorithm } from "@googlemaps/markerclusterer"
-
 import logo15 from '../assets/15c.png'
 import logo10 from '../assets/10c.png'
 import logo20 from '../assets/20c.png'
 import { useCheckbox } from '../context/CheckContext';
-import { UbicacionContext } from '../context/UbicacionContext';
+import { UbicacionContext,useUbicacion  } from '../context/UbicacionContext';
 import { CommercesContext } from '../context/CommercesContext';
 
 
@@ -20,42 +19,9 @@ const API_KEY = process.env.REACT_APP_GOOGLEMAPSAPIKEY
 
 
 const Maps = () => {
-
   const { isChecked } = useCheckbox();
   const { ubicacion } = useContext(UbicacionContext);
   const { comercios } = useContext(CommercesContext);
-
-
-//console.log("comercios",comercios)
-
-  /* useEffect(() => {
-    
-    if (map) {
-      mapRef.current = map;
-    }
-  }, []);
-
-
-  useEffect(() => {
-    if ((mapRef.current && ubicacion && ubicacion.Latitud && ubicacion.Longitud)|| (done)){
-      mapRef.current.setCenter(ubicacion);
-      console.log(mapRef)
-    }
-    console.log("no",mapRef)
-  }, [mapRef,ubicacion]); */
-
-
-  /* useEffect(() => {
-    if (map && ubicacion) {
-      // Actualiza el mapa con la nueva ubicación
-      console.log("ln: ",ubicacion.lat,"lg: ", ubicacion.lng);
-      map.setCenter(parseFloat(ubicacion.lat), parseFloat(ubicacion.lng));
-    }
-    console.log(map)
-    
-  }, [map, ubicacion]);map id anterior bf51a910020fa25a
- */
-
   
   if (isChecked) {
     return (
@@ -74,21 +40,21 @@ const Maps = () => {
           zoom={14}
           center={{lat:ubicacion.lat ,lng:ubicacion.lng }}//|| { lat: 43.64, lng: -79.41 }}
         >
-          <Markers points={comercios } />
+          <Markers points={comercios} />
         </Map>
       </div>
     </APIProvider>
   )
 }
 
-const Markers = React.memo(({ points }) => {
+const Markers = React.memo(({ points,}) => {
   const map = useMap()
   const [markers, setMarkers] = useState({})
   const clusterer = useRef(null)
-  const [openMarkers, setOpenMarkers] = useState({});
+  //const [openMarkers, setOpenMarkers] = useState({});
   const { ubicacion } = useContext(UbicacionContext);
   const { isChecked } = useCheckbox();
-  
+  const { openMarkers, toggleInfoWindow } = useUbicacion();
 
   // Initialize MarkerClusterer
   useEffect(() => {
@@ -134,7 +100,7 @@ const Markers = React.memo(({ points }) => {
       }
     })
   }
-
+/*
   const handleMarkerClick = (point) => {
     setOpenMarkers(prev => ({
       ...prev,
@@ -142,7 +108,7 @@ const Markers = React.memo(({ points }) => {
     }));
   };
 
- 
+ */
 
   useEffect(() => {
     if (map && ubicacion) {
@@ -154,6 +120,11 @@ const Markers = React.memo(({ points }) => {
   let descuento = null;
 
   if(points[0].provincia === undefined) return
+
+  const handleMarkerClick2 = (point) => {
+    
+    toggleInfoWindow(point.key);
+  };
   
   return (
     <>
@@ -178,12 +149,12 @@ const Markers = React.memo(({ points }) => {
                     position={point}
                     key={point.key}
                     ref={marker => setMarkerRef(marker, point.key)}
-                    onClick={() => handleMarkerClick(point)}
+                    onClick={() => handleMarkerClick2(point)}
                   >
                     <span className="tree" ><img  src={descuento}  className=" max-w-[30px] min-h-[30px] max-h-[30px]" alt="logo"/></span>
                     {openMarkers[point.key] && (
                       <InfoWindow position={point} 
-                      onCloseClick={() => handleMarkerClick(point)}>
+                      onCloseClick={() => handleMarkerClick2(point)}>
                        
                         <p className="text-lg"><strong>{point.nomComercio}</strong></p>
                         <p>Direccion: <strong>{point.direccion}</strong></p>
