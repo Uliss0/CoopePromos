@@ -12,6 +12,7 @@ import { searchLocalidades } from "../services/localities.js";
 //import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { IoFilter } from "react-icons/io5";
 //import  CityPick  from "../components/CityPick.js";
+import ScrollToTop from './buttons/ScrollToTop.jsx';
 
 function useSearch() {
   const [search, updateSearch] = useState("");
@@ -279,6 +280,8 @@ function Commerce() {
   //#endregion
 
   return (
+    <div>
+    <ScrollToTop />
     <div className="page">
       
       <header className="   w-full">
@@ -474,10 +477,14 @@ function Commerce() {
       </header>
 
       <main className="">
+
+              
         {loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />}
 
         <Footer select={refselect.current} />
       </main>
+    </div>
+    
     </div>
   );
 }
