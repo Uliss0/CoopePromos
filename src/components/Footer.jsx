@@ -1,10 +1,15 @@
-import {searchLocalidades} from '../services/localities'
-
+import {searchLocalidades} from '../services/localitiesService'
+import { useEffect, useState } from 'react';
 function Footer ({select}) {
-  
-    //console.log("entra al footer",localidad) ok
-      const localidadencontrada=searchLocalidades({select})
-     
+  const [localidadencontrada, setLocalidadEncontrada] = useState({})
+
+  useEffect(() => {
+    const fetchSlides = async () => {
+      const data = await searchLocalidades({select});
+      setLocalidadEncontrada(data);
+    };
+    fetchSlides();
+  }, [select]);
      
       return (
         <div className='pt-10'>

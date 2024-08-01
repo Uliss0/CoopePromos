@@ -1,13 +1,16 @@
 export const searchCommerces = async ({ search, select, selectR, filtrar10,filtrar15,filtrar20 }) => {
   try {
+    /*
     const dataJson = require("..\\src\\mocks\\mock.json");
     const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios
+    */
 
-    /* //cambiar a fetch para poder utilizar un archivo no compilado
-    const response = await fetch('/mocks/localidades.json');
+    const response = await fetch('/mocks/comercios.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         const data = await response.json();
-        const arr = Object.values(data);
- */
+        const arr = Object.values(data)[0];
 
         
     if (

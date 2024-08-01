@@ -3,16 +3,15 @@ import "./Commerce.css";
 import { useState, useCallback, useRef, useContext, useEffect } from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
-import { Commerces } from "./Commerces.jsx";
+import { Commerces } from "./Card.jsx";
 import Footer from "./Footer.jsx";
 import debounce from "just-debounce-it";
-import { UbicacionContext } from "../context/UbicacionContext.js";
 import { CommercesContext } from "../context/CommercesContext.js";
-import { searchLocalidades } from "../services/localities.js";
-//import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { searchLocalidades } from "../services/localitiesService.js";
 import { IoFilter } from "react-icons/io5";
-//import  CityPick  from "../components/CityPick.js";
-import ScrollToTop from './buttons/ScrollToTop.jsx';
+import ScrollToTop from "./buttons/ScrollToTop.jsx";
+import { UbicacionContext } from "../context/UbicacionContext.js";
+
 
 function useSearch() {
   const [search, updateSearch] = useState("");
@@ -97,16 +96,21 @@ function Commerce() {
       filtrar15: ref15.current,
       filtrar20: ref20.current,
     });
-
-    //control muestra el mapa por localidad
-    const localidadCentral = searchLocalidades({ select: newSelect });
-    const ubicacion = {
-      lat: localidadCentral.Latitud,
-      lng: localidadCentral.Longitud,
-      zoom: 15,
-    };
-    setUbicacion(ubicacion);
   };
+  useEffect(() => {
+    const fetchAndSetLocation = async () => {
+      const localidadCentral = await searchLocalidades({ select });
+      const ubicacion = {
+        lat: localidadCentral.Latitud,
+        lng: localidadCentral.Longitud,
+        zoom: 15,
+      };
+
+      setUbicacion(ubicacion);
+    };
+
+    fetchAndSetLocation();
+  }, [select, setUbicacion]);
 
   // ordenar / checkbox
   const handleSort = () => {
@@ -281,210 +285,210 @@ function Commerce() {
 
   return (
     <div>
-    <ScrollToTop />
-    <div className="page">
-      
-      <header className="   w-full">
-        <div className=" xs:m-8 xxs:m-2 xl:mr-96 xl:ml-72  rounded-xl">
-        <form className="form flex items-center space-x-4" onSubmit={handleSubmit} id="formlist">
-  <div className="relative w-full flex items-center">
-    <input
-      type="search"
-      id="search-dropdown"
-      className=" rounded-l-2xl p-2  w-full  text-sm text-gray-900 bg-gray-50  border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-400 dark:placeholder-gray-500 dark:text-gray-700 dark:focus:border-blue-500"
-      placeholder="Buscar Comercio"
-      onChange={handleChange}
-      value={search}
-      name="query"
-      autoComplete="off"
-    />
-    <button
-      type="submit"
-      className="rounded-r-2xl p-2.5  text-sm font-medium h-full text-white bg-[#4273b4] border border-[#4273b4] hover:bg-blue-800  focus:outline-none  dark:bg-[#4273b4] dark:hover:bg-blue-700 "
-    >
-      <svg
-        className="w-4 h-4"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 20 20"
-      >
-        <path
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-        />
-      </svg>
-    </button>
-  </div>
-  <div className="flex items-center space-x-2" id="checkmap">
-    <label className="relative inline-flex cursor-pointer items-center">
-      <input
-        id="switch3"
-        type="checkbox"
-        className="peer sr-only"
-        defaultChecked={!isChecked}
-        onChange={handleMapCheckboxChange}
-      />
-      <label htmlFor="switch3" className="hidden"></label>
-      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
-    </label>
-    <label className="text-xs">Mapa</label>
-  </div>
-</form>
-          
-          <div  className=" flex justify-center ">
-          <button
-            onClick={filtrosClick}
-            className="mt-4 p-2 bg-[#4273b4] text-white rounded-lg flex"
-          >
-            {localidadSeleccionada ? localidadSeleccionada +" - Filtros" : "Seleccione su Localidad Aqui"}{" "}
-             <IoFilter className="min-w-[30px] text-white mt-1" />
-          </button>
-
-          </div>
-          <div
-            className={`fixed top-0 right-0 w-64 h-full bg-gray-300 shadow-lg z-40 transition-transform transform ${
-              mostrarDiv ? "translate-x-0" : "translate-x-full"
-            }`}
-          >
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Filtros</h2>
-              {/* Aquí van tus filtros */}
-              <div className="mb-4 mt-10">
-                <label className="block mb-2"></label>
-                <select
-                  name="localidad"
-                  id="localidad"
-                  className="block w-full bg-gray-50  rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1 "
-                  value={select}
-                  onChange={(e) => {
-                    setLocalidadSeleccionada(e.target.value);
-                    handleSelect(e);
-                  }}
+      <ScrollToTop />
+      <div className="page">
+        <header className="   w-full">
+          <div className=" xs:m-8 xxs:m-2 xl:mr-96 xl:ml-72  rounded-xl">
+            <form
+              className="form flex items-center space-x-4"
+              onSubmit={handleSubmit}
+              id="formlist"
+            >
+              <div className="relative w-full flex items-center">
+                <input
+                  type="search"
+                  id="search-dropdown"
+                  className=" rounded-l-2xl p-2  w-full  text-sm text-gray-900 bg-gray-50  border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-400 dark:placeholder-gray-500 dark:text-gray-700 dark:focus:border-blue-500"
+                  placeholder="Buscar Comercio"
+                  onChange={handleChange}
+                  value={search}
+                  name="query"
+                  autoComplete="off"
+                />
+                <button
+                  type="submit"
+                  className="rounded-r-2xl p-2.5  text-sm font-medium h-full text-white bg-[#4273b4] border border-[#4273b4] hover:bg-blue-800  focus:outline-none  dark:bg-[#4273b4] dark:hover:bg-blue-700 "
                 >
-                  <option value="">Localidad</option>
-                  {localidades.map((localidad) => (
-                    <option key={localidad} value={localidad}>
-                      {localidad}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2"></label>
-                <select
-                  id="rubro"
-                  name="rubro"
-                  onChange={handleSelectRubro}
-                  value={selectR}
-                  className="block w-full bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1"
-                >
-                  <option value="">Rubro</option>
-                  {rubrosFiltrados.map((rubro) => (
-                    <option key={rubro} value={rubro}>
-                      {rubro}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="bg-gray-200 flex flex-col items-center justify-center rounded-lg p-2 mb-4">
-              <div
-                className="p-2 transition-all ease-in-out duration-500"
-                id="check10"
-              >
-                <label className="relative inline-flex cursor-pointer items-center ">
-                  <input
-                    id="switch1"
-                    type="checkbox"
-                    className="peer sr-only"
-                    defaultChecked={filtrar10}
-                    onChange={handleFiltrar10}
-                  />
-                  <label htmlFor="switch1" className="hidden"></label>
-                  <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-                </label>
-                <div>
-                  <label className="text-xs ">10% Dto</label>
-                </div>
-              </div>
-              <div className="p-2" id="check15">
-                <label className="relative inline-flex cursor-pointer items-center ">
-                  <input
-                    id="switch2"
-                    type="checkbox"
-                    className="peer sr-only"
-                    defaultChecked={filtrar15}
-                    onChange={handleFiltrar15}
-                  />
-                  <label htmlFor="switch2" className="hidden"></label>
-                  <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-                </label>
-                <div>
-                  <label className="text-xs ">15% Dto</label>
-                </div>
-              </div>
-              {enableFilter20() ? (
-                ""
-              ) : (
-                <div className="p-2" id="check20">
-                  <label className="relative inline-flex cursor-pointer items-center ">
-                    <input
-                      id="switch20"
-                      type="checkbox"
-                      className="peer sr-only"
-                      defaultChecked={filtrar20}
-                      onChange={handleFiltrar20}
+                  <svg
+                    className="w-4 h-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                     />
-                    <label htmlFor="switch20" className="hidden"></label>
-                    <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-                  </label>
-                  <div>
-                    <label className="text-xs ">20% Dto</label>
+                  </svg>
+                </button>
+              </div>
+              <div className="flex items-center space-x-2" id="checkmap">
+                <label className="relative inline-flex cursor-pointer items-center">
+                  <input
+                    id="switch3"
+                    type="checkbox"
+                    className="peer sr-only"
+                    defaultChecked={!isChecked}
+                    onChange={handleMapCheckboxChange}
+                  />
+                  <label htmlFor="switch3" className="hidden"></label>
+                  <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
+                </label>
+                <label className="text-xs">Mapa</label>
+              </div>
+            </form>
+
+            <div className=" flex justify-center ">
+              <button
+                onClick={filtrosClick}
+                className="mt-4 p-2 bg-[#4273b4] text-white rounded-lg flex"
+              >
+                {localidadSeleccionada
+                  ? localidadSeleccionada + " - Filtros"
+                  : "Seleccione su Localidad Aqui"}{" "}
+                <IoFilter className="min-w-[30px] text-white mt-1" />
+              </button>
+            </div>
+            <div
+              className={`fixed top-0 right-0 w-64 h-full bg-gray-300 shadow-lg z-40 transition-transform transform ${
+                mostrarDiv ? "translate-x-0" : "translate-x-full"
+              }`}
+            >
+              <div className="p-6">
+                <h2 className="text-xl font-semibold mb-4">Filtros</h2>
+                {/* Aquí van tus filtros */}
+                <div className="mb-4 mt-10">
+                  <label className="block mb-2"></label>
+                  <select
+                    name="localidad"
+                    id="localidad"
+                    className="block w-full bg-gray-50  rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1 "
+                    value={select}
+                    onChange={(e) => {
+                      setLocalidadSeleccionada(e.target.value);
+                      handleSelect(e);
+                    }}
+                  >
+                    <option value="">Localidad</option>
+                    {localidades.map((localidad) => (
+                      <option key={localidad} value={localidad}>
+                        {localidad}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block mb-2"></label>
+                  <select
+                    id="rubro"
+                    name="rubro"
+                    onChange={handleSelectRubro}
+                    value={selectR}
+                    className="block w-full bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1"
+                  >
+                    <option value="">Rubro</option>
+                    {rubrosFiltrados.map((rubro) => (
+                      <option key={rubro} value={rubro}>
+                        {rubro}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="bg-gray-200 flex flex-col items-center justify-center rounded-lg p-2 mb-4">
+                  <div
+                    className="p-2 transition-all ease-in-out duration-500"
+                    id="check10"
+                  >
+                    <label className="relative inline-flex cursor-pointer items-center ">
+                      <input
+                        id="switch1"
+                        type="checkbox"
+                        className="peer sr-only"
+                        defaultChecked={filtrar10}
+                        onChange={handleFiltrar10}
+                      />
+                      <label htmlFor="switch1" className="hidden"></label>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                    </label>
+                    <div>
+                      <label className="text-xs ">10% Dto</label>
+                    </div>
+                  </div>
+                  <div className="p-2" id="check15">
+                    <label className="relative inline-flex cursor-pointer items-center ">
+                      <input
+                        id="switch2"
+                        type="checkbox"
+                        className="peer sr-only"
+                        defaultChecked={filtrar15}
+                        onChange={handleFiltrar15}
+                      />
+                      <label htmlFor="switch2" className="hidden"></label>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                    </label>
+                    <div>
+                      <label className="text-xs ">15% Dto</label>
+                    </div>
+                  </div>
+                  {enableFilter20() ? (
+                    ""
+                  ) : (
+                    <div className="p-2" id="check20">
+                      <label className="relative inline-flex cursor-pointer items-center ">
+                        <input
+                          id="switch20"
+                          type="checkbox"
+                          className="peer sr-only"
+                          defaultChecked={filtrar20}
+                          onChange={handleFiltrar20}
+                        />
+                        <label htmlFor="switch20" className="hidden"></label>
+                        <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      </label>
+                      <div>
+                        <label className="text-xs ">20% Dto</label>
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-2" id="checkOrden">
+                    <label className="relative inline-flex cursor-pointer items-center ">
+                      <input
+                        id="switch4"
+                        type="checkbox"
+                        className="peer sr-only"
+                        onChange={handleSort}
+                        checked={sort}
+                      />
+                      <label htmlFor="switch4" className="hidden"></label>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                    </label>
+                    <div>
+                      <label className="text-xs ">Ordenar</label>
+                    </div>
                   </div>
                 </div>
-              )}
-              <div className="p-2" id="checkOrden">
-                <label className="relative inline-flex cursor-pointer items-center ">
-                  <input
-                    id="switch4"
-                    type="checkbox"
-                    className="peer sr-only"
-                    onChange={handleSort}
-                    checked={sort}
-                  />
-                  <label htmlFor="switch4" className="hidden"></label>
-                  <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
-                </label>
-                <div>
-                  <label className="text-xs ">Ordenar</label>
-                </div>
+                <button
+                  onClick={filtrosClick}
+                  className=" p-2 bg-[#4273b4] rounded-lg text-white"
+                >
+                  Cerrar
+                </button>
               </div>
             </div>
-            <button
-              onClick={filtrosClick}
-              className=" p-2 bg-[#4273b4] rounded-lg text-white"
-            >
-              Cerrar
-            </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
-          </div>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </div>
-        
-      </header>
+        </header>
 
-      <main className="">
+        <main className="">
+          {loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />}
 
-              
-        {loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />}
-
-        <Footer select={refselect.current} />
-      </main>
-    </div>
-    
+          <Footer select={refselect.current} />
+        </main>
+      </div>
     </div>
   );
 }

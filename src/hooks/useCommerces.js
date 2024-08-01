@@ -1,5 +1,5 @@
 import { useRef, useState, useMemo, useCallback } from 'react'
-import { searchCommerces } from '../services/commerces.js'
+import { searchCommerces } from '../services/commercesService.js'
 
 export function useCommerces ({ search,select,selectR, sort,filtrar10,filtrar15,filtrar20 }) {
   
