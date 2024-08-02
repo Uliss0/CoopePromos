@@ -11,6 +11,7 @@ import { searchLocalidades } from "../services/localitiesService.js";
 import { IoFilter } from "react-icons/io5";
 import ScrollToTop from "./buttons/ScrollToTop.jsx";
 import { UbicacionContext } from "../context/UbicacionContext.js";
+import Spinner from "./Spinner.jsx";
 
 
 function useSearch() {
@@ -288,6 +289,7 @@ function Commerce() {
       <ScrollToTop />
       <div className="page">
         <header className="   w-full">
+        
           <div className=" xs:m-8 xxs:m-2 xl:mr-96 xl:ml-72  rounded-xl">
             <form
               className="form flex items-center space-x-4"
@@ -484,11 +486,12 @@ function Commerce() {
         </header>
 
         <main className="">
-          {loading ? <p>Cargando...</p> : <Commerces commerces={commerces} />}
+          {loading ? <Spinner/> : <Commerces commerces={commerces} />}
 
           <Footer select={refselect.current} />
         </main>
       </div>
+      
     </div>
   );
 }

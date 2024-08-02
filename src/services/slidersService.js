@@ -1,6 +1,7 @@
 
 const searchSliderAsync = async () => {
     try {
+        //const response = await fetch('https://www.coopeplus.com.ar/contenidos/LandingPage/lp_map/mocks/slider.json');
         const response = await fetch('/mocks/slider.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');

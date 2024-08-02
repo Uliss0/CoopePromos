@@ -22,6 +22,7 @@ const searchLocalidadesAsync =  ({ select }) => { //version dentro del codigo
 
 const searchLocalidadesAsync = async ({ select }) => { //version con fetch a archivo pubic
     try {
+      //const response = await fetch('https://www.coopeplus.com.ar/contenidos/LandingPage/lp_map/mocks/localidades.json');
         const response = await fetch('/mocks/localidades.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');

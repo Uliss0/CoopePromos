@@ -6,7 +6,8 @@ import Icons from '../dataIcons';
 
 function ListOfCommerces ({ commerces }) {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
-  
+  const [visibleCommerces, setVisibleCommerces] = useState(8);
+
   const handleCommerceClick = (commerce) => {
     setSelectedCommerce(commerce);
   };
@@ -15,20 +16,25 @@ function ListOfCommerces ({ commerces }) {
     setSelectedCommerce(null);
   };
   
+  const loadMoreCommerces = () => {
+    setVisibleCommerces(visibleCommerces + 8);
+  };
+  
   if(commerces[0].provincia===undefined)return
  let ico
 
   return (
     <div className=''>
     
-    <div className='cont   xl:px-[100px] '>
+    <div className='cont   xl:px-[100px]'>
     <ul className='commerces '>
-      {
-        commerces.map((commerce) => (
-          // eslint-disable-next-line
-          ico=Icons.icon.find(icon => icon.name === commerce.rubro),
-          <div className='auto-cols-auto ' key={commerce.id}>
-              <li className='commerce gap-12 ' key={commerce.id} value={commerce.id} >
+    {commerces.slice(0, visibleCommerces).map((commerce) => (
+            // eslint-disable-next-line
+            ico = Icons.icon.find((icon) => icon.name === commerce.rubro),
+          <div className='auto-cols-auto' key={commerce.id}>
+              <li className='commerce gap-12 ' 
+              key={commerce.id} 
+              value={commerce.id} >
                 <div 
 
               className=" max-w-[325px] xxs:min-w-[360px] md:min-w-[220px] sm:min-w-[220px] max-h-auto  rounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[rgba(7,_65,_210,_0.2)_0px_9px_20px] dark:bg-white
@@ -63,6 +69,10 @@ function ListOfCommerces ({ commerces }) {
        ))
       }
     </ul>
+    {visibleCommerces < commerces.length && (
+          <button className=' p-2 bg-[#4273b4] text-white rounded-lg'
+          onClick={loadMoreCommerces}>Cargar más</button>
+        )}
     </div>
     {selectedCommerce && (
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center transition-all  duration-400">

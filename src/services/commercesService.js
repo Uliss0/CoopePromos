@@ -4,7 +4,7 @@ export const searchCommerces = async ({ search, select, selectR, filtrar10,filtr
     const dataJson = require("..\\src\\mocks\\mock.json");
     const arr = Object.values(dataJson)[0]; // Acceder directamente al array de comercios
     */
-
+    //const response = await fetch('https://www.coopeplus.com.ar/contenidos/LandingPage/lp_map/mocks/comercios.json');
     const response = await fetch('/mocks/comercios.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
