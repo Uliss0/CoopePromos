@@ -3,6 +3,8 @@ import picture from '../assets/Icons/DESCONOCIDO.png'
 import React, { useState } from 'react';
 import BigCard from './BigCard';
 import Icons from '../dataIcons';
+import { HiMiniChevronDoubleDown } from "react-icons/hi2";
+
 
 function ListOfCommerces ({ commerces }) {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
@@ -69,10 +71,11 @@ function ListOfCommerces ({ commerces }) {
        ))
       }
     </ul>
+    <div className='flex align-middle justify-center'>
     {visibleCommerces < commerces.length && (
-          <button className=' p-2 bg-[#4273b4] text-white rounded-lg'
-          onClick={loadMoreCommerces}>Cargar más</button>
-        )}
+          <button className=' p-2 bg-[#4273b4] text-white rounded-lg flex '
+          onClick={loadMoreCommerces}>Cargar más <HiMiniChevronDoubleDown className='min-w-[25px] text-white mt-1'/></button>
+        )}</div>
     </div>
     {selectedCommerce && (
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center transition-all  duration-400">
