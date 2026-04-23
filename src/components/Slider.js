@@ -35,8 +35,10 @@ function Slider() {
 
   return (
     
-    <div className='max-w-full h-screen w-full m-auto -z-0 relative group pt-[76px] ' style="
-    background-color: rgb(66 115 180/var(--tw-bg-opacity));>
+    <div
+      className='max-w-full h-screen w-full m-auto -z-0 relative group pt-[76px] '
+      style={{ backgroundColor: 'rgb(66 115 180 / var(--tw-bg-opacity))' }}
+    >
       
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].Url})` }}

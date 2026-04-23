@@ -54,7 +54,7 @@ export function BigCard({ commerce, onClose }) {
                                             <h2 className="text-center text-lg mt-2">{commerce.rubro}</h2>   
                                             
                                             
-                                            <p className="text-sm text-left mx-4 mt-4"> ////// En este espacio el comercio podria poner una descripcion de su negocio. La descripcion tiene que estar en el csv//////</p>
+                                            <p className="text-sm text-left mx-4 mt-4">En este espacio el comercio podria mostrar una descripcion de su negocio cuando ese dato este disponible en el CSV.</p>
                                             <br></br>
                                             <div className='flex justify-around text-sm'><MdLocationPin/><p>{commerce.direccion} </p> |<FaPhone/><p>{commerce.prefijo}-{commerce.telefono} </p></div>
                                             <p>{commerce.localidad}</p>

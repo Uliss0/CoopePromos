@@ -1,6 +1,6 @@
 
 import picture from '../assets/Icons/DESCONOCIDO.png'
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import BigCard from './BigCard';
 import Icons from '../dataIcons';
 import { HiMiniChevronDoubleDown } from "react-icons/hi2";
@@ -9,6 +9,16 @@ import { HiMiniChevronDoubleDown } from "react-icons/hi2";
 function ListOfCommerces ({ commerces }) {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
   const [visibleCommerces, setVisibleCommerces] = useState(8);
+
+  const iconsByName = useMemo(
+    () => new Map(Icons.icon.map((icon) => [icon.name, icon.icon])),
+    []
+  );
+
+  useEffect(() => {
+    setVisibleCommerces(8);
+    setSelectedCommerce(null);
+  }, [commerces]);
 
   const handleCommerceClick = (commerce) => {
     setSelectedCommerce(commerce);
@@ -19,20 +29,18 @@ function ListOfCommerces ({ commerces }) {
   };
   
   const loadMoreCommerces = () => {
-    setVisibleCommerces(visibleCommerces + 8);
+    setVisibleCommerces((current) => current + 8);
   };
   
-  if(commerces[0].provincia===undefined)return
- let ico
-
   return (
     <div className=''>
     
     <div className='cont   xl:px-[100px]'>
     <ul className='commerces '>
-    {commerces.slice(0, visibleCommerces).map((commerce) => (
-            // eslint-disable-next-line
-            ico = Icons.icon.find((icon) => icon.name === commerce.rubro),
+    {commerces.slice(0, visibleCommerces).map((commerce) => {
+          const commerceIcon = iconsByName.get(commerce.rubro);
+
+          return (
           <div className='auto-cols-auto' key={commerce.id}>
               <li className='commerce gap-12 ' 
               key={commerce.id} 
@@ -46,9 +54,8 @@ function ListOfCommerces ({ commerces }) {
 
                 <img
                   className="  max-h-[175px] max-w-[175px] xxs:max-w-[175px] xxs:min-h-[175px] items-center inline-flex  p-b-0 :rounded-l-lg"
-                  //src={Icons.find(icon => icon === commerce.rubro)?.image || picture}
                   src={
-                   commerce.img ? commerce.img : (ico) ?  ico.icon : picture}
+                   commerce.img ? commerce.img : commerceIcon || picture}
                   alt="" />
               </div>
               <div className="p-6">
@@ -68,7 +75,7 @@ function ListOfCommerces ({ commerces }) {
               </div>
               </li>
           </div>
-       ))
+       )})
       }
     </ul>
     <div className='flex align-middle justify-center'>
@@ -80,7 +87,7 @@ function ListOfCommerces ({ commerces }) {
     {selectedCommerce && (
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center transition-all  duration-400">
        
-            <BigCard commerce={selectedCommerce} onClose={closeDetails} ico={ico} />
+            <BigCard commerce={selectedCommerce} onClose={closeDetails} />
         
       </div>
     )}

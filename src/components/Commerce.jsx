@@ -1,11 +1,16 @@
 import "../App.css";
 import "./Commerce.css";
-import { useState, useCallback, useRef, useContext, useEffect } from "react";
+import {
+  useContext,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useCommerces } from "../hooks/useCommerces.js";
 import { useCheckbox } from "../context/CheckContext.js";
 import { Commerces } from "./Card.jsx";
 import Footer from "./Footer.jsx";
-import debounce from "just-debounce-it";
 import { CommercesContext } from "../context/CommercesContext.js";
 import { searchLocalidades } from "../services/localitiesService.js";
 import { IoFilter } from "react-icons/io5";
@@ -13,284 +18,176 @@ import ScrollToTop from "./buttons/ScrollToTop.jsx";
 import { UbicacionContext } from "../context/UbicacionContext.js";
 import Spinner from "./Spinner.jsx";
 
+const DEFAULT_LOCATION = {
+  lat: -38.7153823,
+  lng: -62.2657772,
+  zoom: 15,
+};
 
-function useSearch() {
-  const [search, updateSearch] = useState("");
-  const [error] = useState(null);
-
-  return { search, updateSearch, error };
-}
-
-function useSelect() {
-  const [select, updateSelect] = useState("");
-  return { select, updateSelect };
-}
-
-function useSelectR() {
-  const [selectR, updateSelectR] = useState("");
-  return { selectR, updateSelectR };
-}
+const sortByLabel = (items) =>
+  [...items].sort((left, right) => left.localeCompare(right, "es"));
 
 function Commerce() {
   const { setUbicacion } = useContext(UbicacionContext);
   const { setComercios } = useContext(CommercesContext);
+  const { isChecked, toggleCheckbox } = useCheckbox();
+
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [select, setSelect] = useState("");
+  const [selectR, setSelectR] = useState("");
   const [sort, setSort] = useState(false);
-  const { search, updateSearch, error } = useSearch();
-  const { select, updateSelect } = useSelect();
-  const { selectR, updateSelectR } = useSelectR();
   const [mostrarDiv, setMostrarDiv] = useState(false);
   const [filtrar10, setFiltrar10] = useState(true);
   const [filtrar15, setFiltrar15] = useState(true);
   const [filtrar20, setFiltrar20] = useState(true);
+  const [catalogCommerces, setCatalogCommerces] = useState([]);
 
-  const { commerces, loading, getCommerces } = useCommerces({
-    search,
-    select,
-    selectR,
-    sort,
-    filtrar10,
-    filtrar15,
-    filtrar20,
-  });
+  const deferredSearch = useDeferredValue(search);
+  const { commerces, loading, getCommerces } = useCommerces({ sort });
 
-  let refselect = useRef("");
-  let refselectR = useRef("");
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedSearch(deferredSearch.trim());
+    }, 250);
 
-  const debouncedGetCommerces = useCallback(
-    debounce((search) => {
-      getCommerces({
-        search: search,
-        select: refselect.current,
-        selectR: refselectR.current,
-        filtrar10: ref10.current,
-        filtrar15: ref15.current,
-        filtrar20: ref20.current,
-      });
-    }, 300),
-    [getCommerces]
+    return () => window.clearTimeout(timeoutId);
+  }, [deferredSearch]);
+
+  const activeFilters = useMemo(
+    () => ({
+      search: debouncedSearch,
+      select,
+      selectR,
+      filtrar10,
+      filtrar15,
+      filtrar20,
+    }),
+    [debouncedSearch, select, selectR, filtrar10, filtrar15, filtrar20]
   );
 
-  //Manejador del submit del formulario
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    debouncedGetCommerces({
-      search: search,
-      select: refselect.current,
-      selectR: refselectR.current,
-      filtrar10: ref10.current,
-      filtrar15: ref15.current,
-      filtrar20: ref20.current,
-    });
-  };
-
-  //Manejador del select -  parte del buscador
-  const handleSelect = (event) => {
-    const newSelect = event.target.value;
-    refselect.current = newSelect;
-    updateSelect(newSelect);
-    updateSelectR("");
-    getCommerces({
-      search: search,
-      select: newSelect,
-      selectR: "",
-      filtrar10: ref10.current,
-      filtrar15: ref15.current,
-      filtrar20: ref20.current,
-    });
-  };
   useEffect(() => {
+    getCommerces(activeFilters);
+  }, [activeFilters, getCommerces]);
+
+  useEffect(() => {
+    setComercios(commerces);
+  }, [commerces, setComercios]);
+
+  useEffect(() => {
+    const hasNoFilters =
+      !debouncedSearch && !select && !selectR && filtrar10 && filtrar15 && filtrar20;
+
+    if (hasNoFilters && commerces.length > 0) {
+      setCatalogCommerces(commerces);
+    }
+  }, [commerces, debouncedSearch, select, selectR, filtrar10, filtrar15, filtrar20]);
+
+  useEffect(() => {
+    let ignore = false;
+
     const fetchAndSetLocation = async () => {
       const localidadCentral = await searchLocalidades({ select });
-      const ubicacion = {
+
+      if (ignore) {
+        return;
+      }
+
+      const hasCoordinates =
+        localidadCentral?.Latitud !== undefined &&
+        localidadCentral?.Longitud !== undefined;
+
+      if (!hasCoordinates) {
+        setUbicacion(DEFAULT_LOCATION);
+        return;
+      }
+
+      setUbicacion({
         lat: localidadCentral.Latitud,
         lng: localidadCentral.Longitud,
         zoom: 15,
-      };
-
-      setUbicacion(ubicacion);
+      });
     };
 
     fetchAndSetLocation();
+
+    return () => {
+      ignore = true;
+    };
   }, [select, setUbicacion]);
 
-  // ordenar / checkbox
-  const handleSort = () => {
-    setSort(!sort);
-  };
+  const commerceCatalog = catalogCommerces.length > 0 ? catalogCommerces : commerces;
 
-  //Manejador del cambio de búsqueda
-  const handleChange = (event) => {
-    const newSearch = event.target.value;
-    updateSearch(newSearch);
-    debouncedGetCommerces(
-      newSearch,
-      refselect.current,
-      refselectR.current,
-      ref10.current,
-      ref15.current,
-      ref20.current
+  const localidades = useMemo(() => {
+    const uniqueLocalidades = new Set(
+      commerceCatalog.map((commerce) => commerce.localidad).filter(Boolean)
     );
-  };
 
-  const { isChecked, toggleCheckbox } = useCheckbox();
-  const handleMapCheckboxChange = () => {
-    toggleCheckbox();
-  };
+    return sortByLabel([...uniqueLocalidades]);
+  }, [commerceCatalog]);
 
-  //controlando dropdownRubro
-  const handleSelectRubro = (event) => {
-    const selectR = event.target.value;
-    updateSelectR(selectR);
-    refselectR.current = selectR;
+  const rubrosFiltrados = useMemo(() => {
+    const rubros = commerceCatalog
+      .filter((commerce) => !select || commerce.localidad === select)
+      .map((commerce) => commerce.rubro)
+      .filter(Boolean);
+
+    return sortByLabel([...new Set(rubros)]);
+  }, [commerceCatalog, select]);
+
+  const has20Discount = useMemo(
+    () => commerceCatalog.some((item) => item.dto === 20),
+    [commerceCatalog]
+  );
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const nextSearch = search.trim();
+    setDebouncedSearch(nextSearch);
     getCommerces({
-      search: search,
-      select: refselect.current,
-      selectR: refselectR.current,
-      sort: sort,
-      filtrar10: ref10.current,
-      filtrar15: ref15.current,
-      filtrar20: ref20.current,
+      search: nextSearch,
+      select,
+      selectR,
+      filtrar10,
+      filtrar15,
+      filtrar20,
     });
   };
 
-  //boton que muestra filtros
-  const filtrosClick = () => {
-    setMostrarDiv(!mostrarDiv);
+  const handleChange = (event) => {
+    setSearch(event.target.value);
   };
 
-  //#region precarga de datos
-  const [localidades, setLocalidades] = useState([]);
-  const [, setRubros] = useState([]);
-  const [localidadSeleccionada, setLocalidadSeleccionada] = useState(null);
-  const [rubrosFiltrados, setRubrosFiltrados] = useState([]);
-  const isFirstInput = useRef(true);
-  const commercesRef = useRef([]);
-  //Trae todos los datos
-  useEffect(() => {
-    if (isFirstInput.current) {
-      getCommerces({
-        search: "",
-        select: "",
-        selectR: "",
+  const handleSelect = (event) => {
+    const newSelect = event.target.value;
+    setSelect(newSelect);
+    setSelectR("");
+  };
 
-        filtrar10: ref10.current,
-        filtrar15: ref15.current,
-        filtrar20: ref20.current,
-      });
-      isFirstInput.current = false;
+  const handleSelectRubro = (event) => {
+    setSelectR(event.target.value);
+  };
 
+  const toggleDiscountFilter = (discount) => {
+    if (discount === 10) {
+      setFiltrar10((current) => !current);
       return;
     }
-  }, []);
 
-  //Carga las localidades que tengan comercios
-  useEffect(() => {
-    if (
-      isFirstInput.current === false &&
-      commerces !== undefined &&
-      localidades.length === 0 &&
-      commerces.length > 0
-    ) {
-      // todas las localidades únicas de los comercios
-      const localidadesUnicas = [
-        ...new Set(commerces.map((comercio) => comercio.localidad)),
-      ];
-      setLocalidades(localidadesUnicas);
-      commercesRef.current = commerces;
-    }
-  }, [commerces]);
-
-  useEffect(() => {
-    if (commerces.length > 0 && commerces.current !== commerces) {
-      setComercios(commerces);
-    }
-  }, [setComercios, commerces]);
-
-  //Carga los rubros de cada localidad
-
-  useEffect(() => {
-    if (localidadSeleccionada !== null) {
-      const rubrosEnLocalidad = commercesRef.current
-        .filter((comercio) => comercio.localidad === localidadSeleccionada)
-        .map((comercio) => comercio.rubro);
-      const rubrosUnicos = [...new Set(rubrosEnLocalidad)];
-      setRubros(rubrosUnicos); // Aquí se guardan todos los rubros
-      setRubrosFiltrados(rubrosUnicos); // Y aquí los rubros filtrados
-    }
-  }, [localidadSeleccionada, commerces]);
-
-  //#endregion
-
-  //#region filtros
-  //filtros %%
-
-  let ref10 = useRef(true);
-  let ref15 = useRef(true);
-  let ref20 = useRef(true);
-
-  const handleFiltrar10 = () => {
-    const updatedFiltrar10 = !filtrar10;
-    setFiltrar10(updatedFiltrar10);
-    ref10.current = updatedFiltrar10;
-    getCommerces({
-      search: search,
-      select: refselect.current,
-      selectR: refselectR.current,
-      sort: sort,
-      filtrar10: updatedFiltrar10,
-      filtrar15: ref15.current,
-      filtrar20: ref20.current,
-    });
-  };
-
-  const handleFiltrar15 = () => {
-    const updatedFiltrar15 = !filtrar15;
-    setFiltrar15(updatedFiltrar15);
-    ref15.current = updatedFiltrar15;
-    getCommerces({
-      search: search,
-      select: refselect.current,
-      selectR: refselectR.current,
-      sort: sort,
-      filtrar10: ref10.current,
-      filtrar15: updatedFiltrar15,
-      filtrar20: ref20.current,
-    });
-  };
-  const handleFiltrar20 = () => {
-    const updatedFiltrar20 = !filtrar20;
-    setFiltrar20(updatedFiltrar20);
-    ref20.current = updatedFiltrar20;
-    getCommerces({
-      search: search,
-      select: refselect.current,
-      selectR: refselectR.current,
-      sort: sort,
-      filtrar10: ref10.current,
-      filtrar15: ref15.current,
-      filtrar20: updatedFiltrar20,
-    });
-  };
-
-  let previo = useRef(0);
-  const enableFilter20 = () => {
-    let existeValor = commerces.some((item) => item.dto === 20);
-    if (previo.current !== 0 || existeValor) {
-      previo.current = 1;
-      return false;
+    if (discount === 15) {
+      setFiltrar15((current) => !current);
+      return;
     }
 
-    return !existeValor;
+    setFiltrar20((current) => !current);
   };
-  //#endregion
 
   return (
     <div>
       <ScrollToTop />
       <div className="page">
-        <header className="   w-full">
-        
-          <div className=" xs:m-8 xxs:m-2 xl:mr-96 xl:ml-72  rounded-xl">
+        <header className="w-full">
+          <div className="xs:m-8 xxs:m-2 xl:mr-96 xl:ml-72 rounded-xl">
             <form
               className="form flex items-center space-x-4"
               onSubmit={handleSubmit}
@@ -300,16 +197,18 @@ function Commerce() {
                 <input
                   type="search"
                   id="search-dropdown"
-                  className=" rounded-l-2xl p-2  w-full  text-sm text-gray-900 bg-gray-50  border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-400 dark:placeholder-gray-500 dark:text-gray-700 dark:focus:border-blue-500"
-                  placeholder="Buscar Comercio"
+                  className="rounded-l-2xl p-2 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-400 dark:placeholder-gray-500 dark:text-gray-700 dark:focus:border-blue-500"
+                  placeholder="Buscar comercio, rubro o dirección"
                   onChange={handleChange}
                   value={search}
                   name="query"
                   autoComplete="off"
+                  aria-label="Buscar comercios"
                 />
                 <button
                   type="submit"
-                  className="rounded-r-2xl p-2.5  text-sm font-medium h-full text-white bg-[#4273b4] border border-[#4273b4] hover:bg-blue-800  focus:outline-none  dark:bg-[#4273b4] dark:hover:bg-blue-700 "
+                  className="rounded-r-2xl p-2.5 text-sm font-medium h-full text-white bg-[#4273b4] border border-[#4273b4] hover:bg-blue-800 focus:outline-none dark:bg-[#4273b4] dark:hover:bg-blue-700"
+                  aria-label="Buscar"
                 >
                   <svg
                     className="w-4 h-4"
@@ -334,24 +233,25 @@ function Commerce() {
                     id="switch3"
                     type="checkbox"
                     className="peer sr-only"
-                    defaultChecked={!isChecked}
-                    onChange={handleMapCheckboxChange}
+                    checked={!isChecked}
+                    onChange={toggleCheckbox}
                   />
-                  <label htmlFor="switch3" className="hidden"></label>
+                  <span className="hidden">Mapa</span>
                   <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
                 </label>
-                <label className="text-xs">Mapa</label>
+                <label className="text-xs" htmlFor="switch3">
+                  Mapa
+                </label>
               </div>
             </form>
 
-            <div className=" flex justify-center ">
+            <div className="flex justify-center">
               <button
-                onClick={filtrosClick}
+                onClick={() => setMostrarDiv((current) => !current)}
                 className="mt-4 p-2 bg-[#4273b4] text-white rounded-lg flex"
+                type="button"
               >
-                {localidadSeleccionada
-                  ? localidadSeleccionada + " - Filtros"
-                  : "Seleccione su Localidad Aqui"}{" "}
+                {select ? `${select} - Filtros` : "Seleccione su Localidad Aqui"}{" "}
                 <IoFilter className="min-w-[30px] text-white mt-1" />
               </button>
             </div>
@@ -362,18 +262,13 @@ function Commerce() {
             >
               <div className="p-6">
                 <h2 className="text-xl font-semibold mb-4">Filtros</h2>
-                {/* Aquí van tus filtros */}
                 <div className="mb-4 mt-10">
-                  <label className="block mb-2"></label>
                   <select
                     name="localidad"
                     id="localidad"
-                    className="block w-full bg-gray-50  rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200  dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1 "
+                    className="block w-full bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1"
                     value={select}
-                    onChange={(e) => {
-                      setLocalidadSeleccionada(e.target.value);
-                      handleSelect(e);
-                    }}
+                    onChange={handleSelect}
                   >
                     <option value="">Localidad</option>
                     {localidades.map((localidad) => (
@@ -384,13 +279,13 @@ function Commerce() {
                   </select>
                 </div>
                 <div className="mb-4">
-                  <label className="block mb-2"></label>
                   <select
                     id="rubro"
                     name="rubro"
                     onChange={handleSelectRubro}
                     value={selectR}
                     className="block w-full bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-gray-800 dark:hover:bg-gray-100 dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer p-1"
+                    disabled={!select}
                   >
                     <option value="">Rubro</option>
                     {rubrosFiltrados.map((rubro) => (
@@ -405,93 +300,97 @@ function Commerce() {
                     className="p-2 transition-all ease-in-out duration-500"
                     id="check10"
                   >
-                    <label className="relative inline-flex cursor-pointer items-center ">
+                    <label className="relative inline-flex cursor-pointer items-center">
                       <input
                         id="switch1"
                         type="checkbox"
                         className="peer sr-only"
-                        defaultChecked={filtrar10}
-                        onChange={handleFiltrar10}
+                        checked={filtrar10}
+                        onChange={() => toggleDiscountFilter(10)}
                       />
-                      <label htmlFor="switch1" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <span className="hidden">10% descuento</span>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
                     </label>
                     <div>
-                      <label className="text-xs ">10% Dto</label>
+                      <label className="text-xs" htmlFor="switch1">
+                        10% Dto
+                      </label>
                     </div>
                   </div>
                   <div className="p-2" id="check15">
-                    <label className="relative inline-flex cursor-pointer items-center ">
+                    <label className="relative inline-flex cursor-pointer items-center">
                       <input
                         id="switch2"
                         type="checkbox"
                         className="peer sr-only"
-                        defaultChecked={filtrar15}
-                        onChange={handleFiltrar15}
+                        checked={filtrar15}
+                        onChange={() => toggleDiscountFilter(15)}
                       />
-                      <label htmlFor="switch2" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <span className="hidden">15% descuento</span>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
                     </label>
                     <div>
-                      <label className="text-xs ">15% Dto</label>
+                      <label className="text-xs" htmlFor="switch2">
+                        15% Dto
+                      </label>
                     </div>
                   </div>
-                  {enableFilter20() ? (
-                    ""
-                  ) : (
+                  {has20Discount && (
                     <div className="p-2" id="check20">
-                      <label className="relative inline-flex cursor-pointer items-center ">
+                      <label className="relative inline-flex cursor-pointer items-center">
                         <input
                           id="switch20"
                           type="checkbox"
                           className="peer sr-only"
-                          defaultChecked={filtrar20}
-                          onChange={handleFiltrar20}
+                          checked={filtrar20}
+                          onChange={() => toggleDiscountFilter(20)}
                         />
-                        <label htmlFor="switch20" className="hidden"></label>
-                        <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                        <span className="hidden">20% descuento</span>
+                        <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
                       </label>
                       <div>
-                        <label className="text-xs ">20% Dto</label>
+                        <label className="text-xs" htmlFor="switch20">
+                          20% Dto
+                        </label>
                       </div>
                     </div>
                   )}
                   <div className="p-2" id="checkOrden">
-                    <label className="relative inline-flex cursor-pointer items-center ">
+                    <label className="relative inline-flex cursor-pointer items-center">
                       <input
                         id="switch4"
                         type="checkbox"
                         className="peer sr-only"
-                        onChange={handleSort}
+                        onChange={() => setSort((current) => !current)}
                         checked={sort}
                       />
-                      <label htmlFor="switch4" className="hidden"></label>
-                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300 "></div>
+                      <span className="hidden">Ordenar alfabéticamente</span>
+                      <div className="peer h-4 w-11 rounded-full border bg-gray-400 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#4273b4] peer-checked:after:translate-x-full peer-focus:ring-blue-300"></div>
                     </label>
                     <div>
-                      <label className="text-xs ">Ordenar</label>
+                      <label className="text-xs" htmlFor="switch4">
+                        Ordenar
+                      </label>
                     </div>
                   </div>
                 </div>
                 <button
-                  onClick={filtrosClick}
-                  className=" p-2 bg-[#4273b4] rounded-lg text-white"
+                  onClick={() => setMostrarDiv(false)}
+                  className="p-2 bg-[#4273b4] rounded-lg text-white"
+                  type="button"
                 >
                   Cerrar
                 </button>
               </div>
             </div>
-            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
         </header>
 
-        <main className="">
-          {loading ? <Spinner/> : <Commerces commerces={commerces} />}
-
-          <Footer select={refselect.current} />
+        <main>
+          {loading ? <Spinner /> : <Commerces commerces={commerces} />}
+          <Footer select={select} />
         </main>
       </div>
-      
     </div>
   );
 }
