@@ -100,14 +100,38 @@ function ListOfCommerces ({ commerces }) {
 
 function NoCommercesResults () {
   return (
-    <p>No se encontraron comercios para esta búsqueda</p>
+    <div className="py-16 text-center">
+      <h3 className="text-xl font-semibold mb-2">No se encontraron comercios</h3>
+      <p className="text-sm text-gray-600">Intenta cambiar filtros o buscar otra localidad.</p>
+    </div>
   )
 }
 
-export function Commerces ({ commerces }) {
-  const hasCommerces = commerces?.length > 0
+export function Commerces ({ commerces, loading = false }) {
+  if (loading) {
+    const placeholders = Array.from({ length: 6 }).map((_, i) => (
+      <div className="auto-cols-auto" key={`ph-${i}`}>
+        <li className="commerce gap-12" key={`ph-li-${i}`}>
+          <div className="max-w-[325px] xxs:min-w-[360px] md:min-w-[220px] sm:min-w-[220px] max-h-auto rounded-lg bg-white p-4">
+            <div className="animate-pulse">
+              <div className="h-40 bg-gray-200 rounded-md mb-4" />
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+              <div className="h-3 bg-gray-200 rounded w-1/2 mb-2" />
+              <div className="h-3 bg-gray-200 rounded w-1/3" />
+            </div>
+          </div>
+        </li>
+      </div>
+    ));
 
+    return (
+      <div className="cont xl:px-[100px]">
+        <ul className="commerces grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{placeholders}</ul>
+      </div>
+    );
+  }
 
+  const hasCommerces = commerces?.length > 0;
 
   return (
     hasCommerces

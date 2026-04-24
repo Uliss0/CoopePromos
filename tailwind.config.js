@@ -5,10 +5,16 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Sarala', ],
-      sara:'Sarala',
+      sans: ['Rubik', 'Helvetica', 'Arial', 'sans-serif'],
+      sara: 'Sarala',
     },
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#0f63aa',
+        },
+        accent: '#e1201c',
+      },
       screens: {
         'xxs': '320px',
         // => @media (min-width: 320px) { ... }

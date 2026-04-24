@@ -109,6 +109,7 @@ const Markers = React.memo(
     }, [map, ubicacion]);
     let descuento = null;
 
+    if (!points || !Array.isArray(points) || points.length === 0) return;
     if (points[0].provincia === undefined) return;
 
     const handleMarkerClick2 = (point) => {

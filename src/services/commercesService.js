@@ -1,4 +1,5 @@
 import { fetchMockJson } from "./fetchJson";
+import Fuse from 'fuse.js';
 
 let commercesPromise;
 
@@ -88,22 +89,22 @@ export const searchCommerces = async ({
       filteredCommerces = filteredCommerces.filter((item) => item.Dto !== 20);
     }
 
-    if (searchTokens.length > 0) {
-      filteredCommerces = filteredCommerces.filter((item) => {
-        const searchableText = normalizeText(
-          [
-            item.NomComercio,
-            item.Rubro,
-            item.Direccion,
-            item.Localidad,
-            item.Provincia,
-          ]
-            .filter(Boolean)
-            .join(" ")
-        );
-
-        return searchTokens.every((token) => searchableText.includes(token));
+    if (normalizedSearch) {
+      const fuse = new Fuse(filteredCommerces, {
+        keys: [
+          { name: 'NomComercio', weight: 0.7 },
+          { name: 'Rubro', weight: 0.5 },
+          { name: 'Direccion', weight: 0.4 },
+          { name: 'Localidad', weight: 0.3 },
+          { name: 'Provincia', weight: 0.2 },
+        ],
+        threshold: 0.35,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
       });
+
+      const fuseResults = fuse.search(normalizedSearch);
+      filteredCommerces = fuseResults.map((r) => r.item);
     }
 
     return filteredCommerces.map(mapCommerce);
